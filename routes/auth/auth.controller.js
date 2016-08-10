@@ -29,6 +29,7 @@ exports.authenticate = (req, res, next) => {
 }
 
 function handleError(res, err, response) {
+  if (err) return res.status(500).send(err);
   let {statusCode, body: { message } } = response;
   debug(`
     Error authenticating with status code:${statusCode},
