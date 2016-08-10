@@ -33,8 +33,7 @@ function handleError(res, err, response) {
   let {statusCode, body: { message } } = response;
   debug(`
     Error authenticating with status code:${statusCode},
-    Error: ${err},
     Message: ${message}
     `);
-  return res.status(statusCode).send(err || { message });
+  return res.status(statusCode).send({ message });
 }

@@ -1,6 +1,7 @@
 'use strict';
 
-const Settings = require('./settings.model')
+const Settings = require('./settings.model'),
+      debug = require('debug')('InterviewAppServer: settings')
 
 exports.index = (req, res) => {
   Settings
@@ -14,10 +15,12 @@ exports.index = (req, res) => {
 exports.show = (req, res) => {
   Settings
     .findOne({user: req.params.id})
+    .deepPopulate('categories.category categories.questions categories.questions.category')
     .lean()
     .exec((err, settings) => {
-      console.log(err);
-      return res.status(err ? 400 : 200).json(err || settings);
+      if (err || !settings) return handleError(res, err, {statusCode: 400, message: 'No settings found - please update your interview app profile'})
+      // if (err || !settings) return res.status(400).json(err || 'No settings found - please update your interview app profile')
+      return res.status(200).json(settings);
     })
 }
 
@@ -37,4 +40,14 @@ exports.delete = (req, res) => {
   Settings.findOneAndRemove({ user: req.params.id }, (err, removed) => {
     return res.status(err ? 400 : 200).json(err || 'deleted!');
   })
+}
+
+function handleError(res, err, response) {
+  if (err) return res.status(500).send(err);
+  let {statusCode, message } = response;
+  debug(`
+    Error in settings with status code:${statusCode},
+    Message: ${message}
+    `);
+  return res.status(statusCode).send({ message });
 }

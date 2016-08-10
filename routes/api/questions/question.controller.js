@@ -5,7 +5,6 @@ const Question = require('./question.model')
 exports.index = (req, res) => {
   Question
     .find({})
-    .select('_id')
     .lean()
     .exec((err, questions) => {
       return res.status(err ? 400 : 200).json(err || questions);
@@ -13,7 +12,6 @@ exports.index = (req, res) => {
 }
 
 exports.create = (req, res) => {
-  console.log(req.body)
   Question.create(req.body, (err, question) => {
     return res.status(err ? 400 : 200).json(err || question);
   })

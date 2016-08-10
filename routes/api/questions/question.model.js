@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
-  category: { type: Schema.Types.ObjectId, ref: 'category'},
+  category: { type: Schema.Types.ObjectId, ref: 'Category'},
   levels: [
     {
       type: {type: String},
@@ -12,7 +12,7 @@ const QuestionSchema = new Schema({
       placeholder: String,
       label: String,
       options: [String],
-      default: Schema.Types.Mixed,
+      defaultValue: Schema.Types.Mixed,
       range: Number
     }
   ]
