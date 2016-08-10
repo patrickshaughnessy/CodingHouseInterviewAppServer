@@ -5,7 +5,12 @@ const mongoose = require('mongoose'),
 
 const SettingsSchema = new Schema({
   user: { type: String, unique: true },
-  questions: [{ type: Schema.Types.ObjectId, ref: 'question'}]
+  categories: [
+    {
+      category: { type: Schema.Types.ObjectId, ref: 'category'},
+      questions: [{ type: Schema.Types.ObjectId, ref: 'question'}]
+    }
+  ]
 })
 
 module.exports = mongoose.model('Settings', SettingsSchema);

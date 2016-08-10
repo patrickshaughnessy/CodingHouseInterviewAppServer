@@ -14,6 +14,7 @@ module.exports = function(app) {
   app.use('/api/categories', require('routes/api/categories'));
   app.use('/api/interviews', require('routes/api/interviews'));
   app.use('/api/questions', require('routes/api/questions'));
+  app.use('/api/settings', require('routes/api/settings'));
   app.use('/auth', require('routes/auth'))
 
   // catch 404 and forward to error handler

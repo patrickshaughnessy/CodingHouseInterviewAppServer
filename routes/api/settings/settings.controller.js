@@ -11,6 +11,16 @@ exports.index = (req, res) => {
     })
 }
 
+exports.show = (req, res) => {
+  Settings
+    .findOne({user: req.params.id})
+    .lean()
+    .exec((err, settings) => {
+      console.log(err);
+      return res.status(err ? 400 : 200).json(err || settings);
+    })
+}
+
 exports.create = (req, res) => {
   Settings.create(req.body, (err, settings) => {
     return res.status(err ? 400 : 200).json(err || settings);
@@ -18,13 +28,13 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  Settings.findByIdAndUpdate(req.body._id, req.body, 'new', (err, settings) => {
+  Settings.findOneAndUpdate({ user: req.params.id }, req.body, 'new', (err, settings) => {
     return res.status(err ? 400 : 200).json(err || settings);
   });
 }
 
 exports.delete = (req, res) => {
-  Settings.findByIdAndRemove(req.params.id, (err, removed) => {
+  Settings.findOneAndRemove({ user: req.params.id }, (err, removed) => {
     return res.status(err ? 400 : 200).json(err || 'deleted!');
   })
 }
