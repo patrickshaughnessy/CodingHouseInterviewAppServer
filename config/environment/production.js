@@ -9,9 +9,10 @@ module.exports = {
     port: process.env.PORT || 8080
   },
 
+  // set CodingHouse API urls with config vars for heroku app
   codinghouse: {
-    auth_token_url: 'https://codinghouse.co/auth/local',
-    user_info_url: 'https://codinghouse.co/api/users/me',
-    users_url: 'https://codinghouse.co/api/users'
+    auth_token_url: process.env.CH_AUTH_TOKEN_URL || 'https://codinghouse.co/auth/local',
+    user_info_url: process.env.CH_USER_INFO_URL || 'https://codinghouse.co/api/users/me',
+    users_url: process.env.CH_USERS_URL || 'https://codinghouse.co/api/users'
   }
 }

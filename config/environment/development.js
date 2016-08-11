@@ -6,7 +6,7 @@ module.exports = {
   },
 
   server: {
-    port: 1337
+    port: process.env.PORT || 1337
   },
 
   codinghouse: {
