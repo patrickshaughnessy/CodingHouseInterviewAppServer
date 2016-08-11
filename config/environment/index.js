@@ -18,7 +18,7 @@ const base = {
   },
 
   server: {
-    port: process.env.PORT || 8000,
+    port: process.env.PORT || 8080,
     ip: process.env.IP
   },
 

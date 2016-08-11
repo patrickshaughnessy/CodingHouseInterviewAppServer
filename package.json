@@ -2,8 +2,9 @@
   "name": "InterviewAppServer",
   "version": "0.0.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
-    "start": "echo Starting app without explicit configuration && echo Check npm run for options && node app.js",
+    "start": "node app.js",
     "test": "source .env/test && mocha --recursive",
     "start:dev": "source .env/development && DEBUG=InterviewAppServer:* nodemon app.js",
     "start:prod": "source .env/production && DEBUG=InterviewAppServer:* node app.js"
@@ -19,8 +20,7 @@
     "lodash.merge": "^4.5.1",
     "mongoose-deep-populate": "^3.0.0",
     "morgan": "~1.6.1",
-    "rootpath": "^0.1.2",
-    "serve-favicon": "~2.3.0"
+    "rootpath": "^0.1.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",

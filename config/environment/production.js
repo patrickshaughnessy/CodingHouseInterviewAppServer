@@ -2,10 +2,16 @@
 
 module.exports = {
   mongo: {
-    uri: 'mongodb://localhost/InterviewApp-prod'
+    uri: process.env.MONGO_URI || 'mongodb://localhost/InterviewApp-prod'
   },
 
-  auth: {
-    tokenURL: 'https://codinghouse.co/auth/local'
+  server: {
+    port: process.env.PORT || 8080
+  },
+
+  codinghouse: {
+    auth_token_url: 'https://codinghouse.co/auth/local',
+    user_info_url: 'https://codinghouse.co/api/users/me',
+    users_url: 'https://codinghouse.co/api/users'
   }
 }
