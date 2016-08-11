@@ -19,7 +19,6 @@ exports.show = (req, res) => {
     .lean()
     .exec((err, settings) => {
       if (err || !settings) return handleError(res, err, {statusCode: 400, message: 'No settings found - please update your interview app profile'})
-      // if (err || !settings) return res.status(400).json(err || 'No settings found - please update your interview app profile')
       return res.status(200).json(settings);
     })
 }

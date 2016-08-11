@@ -12,6 +12,6 @@ module.exports = {
   codinghouse: {
     auth_token_url: 'https://chonboarding.herokuapp.com/auth/local',
     user_info_url: 'https://chonboarding.herokuapp.com/api/users/me',
-    user_search_url: 'https://chonboarding.herokuapp.com/api/users/search?'
+    users_url: 'https://chonboarding.herokuapp.com/api/users'
   }
 }
