@@ -13,7 +13,7 @@ debug('Configuring for NODE_ENV=%s', process.env.NODE_ENV)
 
 const base = {
   mongo: {
-    uri: process.env.MONGO_URI,
+    uri: process.env.MONGODB_URI,
     options: {}
   },
 

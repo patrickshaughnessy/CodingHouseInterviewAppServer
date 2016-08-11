@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "main": "app.js",
+  "engines": {
+    "node": "6.1.0"
+  },
   "scripts": {
     "start": "node app.js",
     "test": "source .env/test && mocha --recursive",

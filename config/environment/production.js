@@ -2,7 +2,7 @@
 
 module.exports = {
   mongo: {
-    uri: process.env.MONGO_URI || 'mongodb://localhost/InterviewApp-prod'
+    uri: process.env.MONGODB_URI || 'mongodb://localhost/InterviewApp-prod'
   },
 
   server: {
