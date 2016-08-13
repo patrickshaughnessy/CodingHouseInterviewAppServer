@@ -1,20 +1,17 @@
-'use strict';
+'use strict'
 
-const express = require('express'),
-      debug = require('debug')('InterviewAppServer: express'),
-      morgan = require('morgan'),
-      compression = require('compression'),
-      bodyParser = require('body-parser'),
-      cookieParser = require('cookie-parser'),
-      mongoose = require('mongoose');
+const debug = require('debug')('InterviewAppServer: config/express')
+const morgan = require('morgan')
+const compression = require('compression')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
-module.exports = function(app) {
-  const env = app.get('env');
+module.exports = function (app) {
+  debug('Setting default express app middleware')
 
-  app.use(compression());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(cookieParser());
-  app.use(morgan('dev'));
-
-};
+  app.use(compression())
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(cookieParser())
+  app.use(morgan('dev'))
+}

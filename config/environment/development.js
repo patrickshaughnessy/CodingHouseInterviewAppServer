@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   mongo: {
@@ -6,7 +6,7 @@ module.exports = {
   },
 
   server: {
-    port: process.env.PORT || 1337
+    port: process.env.PORT || 3000
   },
 
   codinghouse: {

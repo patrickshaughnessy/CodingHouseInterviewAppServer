@@ -1,14 +1,34 @@
-'use strict';
+'use strict'
 
 require('rootpath')()
-const request = require('supertest'),
-      { expect } = require('chai');
+const request = require('supertest')
+const express = require('express')
+const config = require('config')
+const { expect } = require('chai')
 
-exports = describe('Auth route /auth', function() {
-  let server = require('app');
-  
-  describe('POST /auth', function(){
-    it('returns token and user info', function(done) {
+exports = describe('Auth route /auth', function () {
+  describe('POST /auth', function () {
+    const { port, ip } = config.environment.server
+    const app = express()
+    config.express(app)
+    config.routes(app)
+
+    let server
+
+    beforeEach(function (done) {
+      server = require('http').createServer(app)
+      server.listen(port, ip)
+      server.on('listening', function () {
+        done()
+      })
+    })
+
+    afterEach(function (done) {
+      server.close()
+      done()
+    })
+
+    it('returns token and user info', function (done) {
       let fakeUser = {
         email: 'admin@admin.com',
         password: 'admin'
@@ -17,16 +37,16 @@ exports = describe('Auth route /auth', function() {
       .post('/auth')
       .send(fakeUser)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         if (err) throw err
-        let { token, user } = res.body;
+        let { token, user } = res.body
         expect(token).to.exist
         expect(user).to.exist
         done()
       })
     })
 
-    it('sends error with incorrect credentials', function(done) {
+    it('sends error with incorrect credentials', function (done) {
       let fakeUser = {
         email: 'bad@credentials.com',
         password: 'test'
@@ -35,9 +55,9 @@ exports = describe('Auth route /auth', function() {
       .post('/auth')
       .send(fakeUser)
       .expect(500)
-      .end(function(err, res) {
+      .end(function (err, res) {
         if (err) throw err
-        let { message } = res.body;
+        let { message } = res.body
         expect(message).to.exist
         done()
       })

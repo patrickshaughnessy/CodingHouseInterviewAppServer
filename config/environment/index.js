@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const merge = require('lodash.merge'),
-      debug = require('debug')('InterviewAppServer: config');
+const merge = require('lodash.merge')
+const debug = require('debug')('InterviewAppServer: config')
 
 const envs = ['development', 'production', 'test']
 if (!process.env.NODE_ENV || envs.indexOf(process.env.NODE_ENV) === -1) {
@@ -27,24 +27,24 @@ const base = {
   secrets: {
     session: process.env.SESSION_SECRET,
     api_secret: process.env.API_SECRET
-  },
+  }
 
 }
 
-let extendedOptions;
+let extendedOptions
 
 switch (process.env.NODE_ENV) {
   case 'development':
-    extendedOptions = require('./development');
-    break;
+    extendedOptions = require('./development')
+    break
   case 'production':
-    extendedOptions = require('./production');
-    break;
+    extendedOptions = require('./production')
+    break
   case 'test':
-    extendedOptions = require('./test');
-    break;
+    extendedOptions = require('./test')
+    break
 }
 
-const config = merge(base, extendedOptions);
+const config = merge(base, extendedOptions)
 
-module.exports = config;
+module.exports = config

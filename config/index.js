@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const environment = require('./environment')
 const express = require('./express')
