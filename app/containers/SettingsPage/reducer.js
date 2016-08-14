@@ -1,15 +1,3 @@
-/*
- * AppReducer
- *
- * The reducer takes care of our data. Using actions, we can change our
- * application state.
- * To add a new action, add it to the switch statement in the reducer function
- *
- * Example:
- * case YOUR_ACTION_CONSTANT:
- *   return state.set('yourStateVariable', true);
- */
-
 import {
   REQUEST_SETTINGS,
   RECEIVE_SETTINGS_SUCCESS,
@@ -19,12 +7,24 @@ import { fromJS } from 'immutable'
 
 // The initial state of the App
 const initialState = fromJS({
-  settings: null,
+  questions: null,
+  categories: null,
   fetching: null,
   error: null
 })
 
-function appReducer (state = initialState, action) {
+const mapQuestionsToCategories = (categories) => {
+  console.log(categories)
+  return categories.reduce((a, category) => {
+    let { category: {name: name}, questions } = category
+    a[name] = questions
+    return a
+  }, {})
+}
+
+const mapCategoriesToName = (categories) => categories.map(({category}) => category.name)
+
+function settingsReducer (state = initialState, action) {
   switch (action.type) {
     case REQUEST_SETTINGS:
       return state
@@ -32,9 +32,11 @@ function appReducer (state = initialState, action) {
         .set('error', false)
         .set('settings', null)
     case RECEIVE_SETTINGS_SUCCESS:
+      const { settings } = action
       return state
         .set('fetching', false)
-        .set('settings', fromJS(action.settings))
+        .set('questions', fromJS(mapQuestionsToCategories(settings.categories)))
+        .set('categories', fromJS(mapCategoriesToName(settings.categories)))
     case RECEIVE_SETTINGS_FAILURE:
       return state
         .set('fetching', false)
@@ -44,4 +46,4 @@ function appReducer (state = initialState, action) {
   }
 }
 
-export default appReducer
+export default settingsReducer

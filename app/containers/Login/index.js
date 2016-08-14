@@ -9,25 +9,20 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Helmet from 'react-helmet'
 
-import messages from './messages'
+// import messages from './messages'
 import { createStructuredSelector } from 'reselect'
 
 import {
-  selectRepos,
-  selectLoading,
-  selectError
-} from 'containers/App/selectors'
-
-import {
   selectEmail,
-  selectPassword
+  selectPassword,
+  selectAttempting,
+  selectUser,
+  selectError
 } from './selectors'
 
 import { changeEmail, changePassword, login } from './actions'
-// import { loadRepos } from '../App/actions'
 
-import { FormattedMessage } from 'react-intl'
-import RepoListItem from 'containers/RepoListItem'
+// import { FormattedMessage } from 'react-intl'
 import Button from 'components/Button'
 import H2 from 'components/H2'
 import List from 'components/List'
@@ -41,9 +36,9 @@ export class HomePage extends React.Component {
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount () {
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm()
-    }
+    // if (this.props.username && this.props.username.trim().length > 0) {
+    //   this.props.onSubmitForm()
+    // }
   }
   /**
    * Changes the route
@@ -71,19 +66,29 @@ export class HomePage extends React.Component {
     let mainContent = null
 
     // Show a loading indicator when we're loading
-    if (this.props.loading) {
+    if (this.props.attempting) {
       mainContent = (<List component={LoadingIndicator} />)
 
     // Show an error if there is one
-    } else if (this.props.error !== false) {
+    } else if (this.props.error) {
       const ErrorComponent = () => (
         <ListItem item={'Something went wrong, please try again!'} />
       )
       mainContent = (<List component={ErrorComponent} />)
 
     // If we're not loading, don't have an error and there are repos, show the repos
-    } else if (this.props.repos !== false) {
-      mainContent = (<List items={this.props.repos} component={RepoListItem} />)
+    } else if (this.props.user) {
+      const UserComponent = () => (
+        <ListItem item={`Welcome ${this.props.user.get('name')}!`} />
+      )
+      mainContent = (
+        <div>
+          <List component={UserComponent} />
+          <Button handleRoute={this.openSettingsPage}>
+            Settings
+          </Button>
+        </div>
+      )
     }
 
     const { email, password, onChangeEmail, onChangePassword } = this.props
@@ -98,7 +103,7 @@ export class HomePage extends React.Component {
         />
         <div>
           <section className={`${styles.textSection} ${styles.centered}`}>
-            <H2>ADMIN PAGE</H2>
+            <H2>LOGIN PAGE</H2>
           </section>
           <section className={styles.textSection}>
             <H2>LOGIN</H2>
@@ -130,9 +135,6 @@ export class HomePage extends React.Component {
             </form>
             {mainContent}
           </section>
-          <Button handleRoute={this.openSettingsPage}>
-            <FormattedMessage {...messages.featuresButton} />
-          </Button>
         </div>
       </article>
     )
@@ -154,7 +156,8 @@ HomePage.propTypes = {
   password: React.PropTypes.string,
   onChangeEmail: React.PropTypes.func,
   onChangePassword: React.PropTypes.func,
-  login: React.PropTypes.func
+  login: React.PropTypes.func,
+  user: React.PropTypes.object
 }
 
 function mapDispatchToProps (dispatch) {
@@ -169,10 +172,10 @@ function mapDispatchToProps (dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  repos: selectRepos(),
   email: selectEmail(),
   password: selectPassword(),
-  loading: selectLoading(),
+  user: selectUser(),
+  attempting: selectAttempting(),
   error: selectError()
 })
 

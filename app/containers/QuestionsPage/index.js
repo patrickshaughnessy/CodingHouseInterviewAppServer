@@ -1,5 +1,4 @@
 /*
- * FeaturePage
  *
  * List all the features
  */
@@ -15,7 +14,7 @@ import H1 from 'components/H1'
 
 import styles from './styles.css'
 
-export class FeaturePage extends React.Component {
+export class SettingsPage extends React.Component {
   /**
    * Changes the route
    *
@@ -36,9 +35,9 @@ export class FeaturePage extends React.Component {
     return (
       <div>
         <Helmet
-          title='Feature Page'
+          title='Settings'
           meta={[
-            { name: 'description', content: 'Feature page of React.js Boilerplate application' }
+            { name: 'description', content: 'Change settings for your interview' }
           ]}
         />
         <H1>
@@ -97,7 +96,7 @@ export class FeaturePage extends React.Component {
     )
   }
 }
-FeaturePage.propTypes = {
+SettingsPage.propTypes = {
   changeRoute: React.PropTypes.func
 }
 
@@ -107,4 +106,4 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(FeaturePage)
+export default connect(null, mapDispatchToProps)(SettingsPage)

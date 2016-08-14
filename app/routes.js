@@ -17,20 +17,29 @@ export default function createRoutes (store) {
   const { injectReducer, injectSagas } = getAsyncInjectors(store)
 
   return [
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   getComponent (nextState, cb) {
+    //     System.import('containers/HomePage')
+    //       .then(loadModule(cb))
+    //       .catch(errorLoading)
+    //   }
+    // },
     {
-      path: '/',
-      name: 'home',
+      path: '/login',
+      name: 'login',
       getComponent (nextState, cb) {
         const importModules = Promise.all([
-          System.import('containers/HomePage/reducer'),
-          System.import('containers/HomePage/sagas'),
-          System.import('containers/HomePage')
+          System.import('containers/Login/reducer'),
+          System.import('containers/Login/sagas'),
+          System.import('containers/Login')
         ])
 
         const renderRoute = loadModule(cb)
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('home', reducer.default)
+          injectReducer('login', reducer.default)
           injectSagas(sagas.default)
 
           renderRoute(component)
@@ -38,15 +47,39 @@ export default function createRoutes (store) {
 
         importModules.catch(errorLoading)
       }
-    }, {
-      path: '/features',
-      name: 'features',
+    },
+    {
+      path: '/settings',
+      name: 'settings',
       getComponent (nextState, cb) {
-        System.import('containers/FeaturePage')
+        const importModules = Promise.all([
+          System.import('containers/SettingsPage/reducer'),
+          System.import('containers/SettingsPage/sagas'),
+          System.import('containers/SettingsPage')
+        ])
+
+        const renderRoute = loadModule(cb)
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('settings', reducer.default)
+          injectSagas(sagas.default)
+
+          renderRoute(component)
+        })
+
+        importModules.catch(errorLoading)
+      }
+    },
+    {
+      path: '/questions',
+      name: 'questions',
+      getComponent (nextState, cb) {
+        System.import('containers/QuestionsPage')
           .then(loadModule(cb))
           .catch(errorLoading)
       }
-    }, {
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent (nextState, cb) {
