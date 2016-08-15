@@ -50,8 +50,8 @@
     "*.css": "stylelint"
   },
   "pre-commit": [
-    "test",
-    "lint:staged"
+    "lint:staged",
+    "test"
   ],
   "babel": {
     "presets": [
