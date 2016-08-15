@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "npm run build:dll",
     "heroku-prebuild": "npm install --dev",
-    "prebuild": "npm run build:clean && npm run test",
+    "prebuild": "npm run build:clean",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p",
     "build:clean": "npm run test:clean && rimraf ./build",
     "build:dll": "node ./internals/scripts/dependencies.js",
@@ -20,7 +20,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "standard --verbose | snazzy",
     "lint:css": "stylelint ./app/**/*.css",
-    "lint:staged": "lint-staged",
+    "lint:staged": "lint-staged && npm run test",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
     "test:watch": "npm run test -- --auto-watch --no-single-run",
