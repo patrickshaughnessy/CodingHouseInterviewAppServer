@@ -49,10 +49,13 @@
     "*.js": "lint:js",
     "*.css": "lint:css"
   },
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
+  "pre-commit": {
+    "silent": false,
+    "run": [
+      "lint",
+      "test"
+    ]
+  },
   "babel": {
     "presets": [
       [
