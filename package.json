@@ -47,10 +47,10 @@
   },
   "lint-staged": {
     "*.js": "lint:js",
-    "*.css": "stylelint"
+    "*.css": "lint:css"
   },
   "pre-commit": [
-    "lint:staged",
+    "lint",
     "test"
   ],
   "babel": {
