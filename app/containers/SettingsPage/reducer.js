@@ -14,7 +14,6 @@ const initialState = fromJS({
 })
 
 const mapQuestionsToCategories = (categories) => {
-  console.log(categories)
   return categories.reduce((a, category) => {
     let { category: {name: name}, questions } = category
     a[name] = questions
@@ -35,8 +34,8 @@ function settingsReducer (state = initialState, action) {
       const { settings } = action
       return state
         .set('fetching', false)
-        .set('questions', fromJS(mapQuestionsToCategories(settings.categories)))
-        .set('categories', fromJS(mapCategoriesToName(settings.categories)))
+        .set('questions', mapQuestionsToCategories(settings.categories))
+        .set('categories', mapCategoriesToName(settings.categories))
     case RECEIVE_SETTINGS_FAILURE:
       return state
         .set('fetching', false)

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  box-shadow: 1px 1px 3px black;
+}
+
+.level {
+  flex: 1;
+  padding-left: 1em;
+}
+
+.innerContainer {
+  padding: 5px;
+  display: flex;
+  flex: 4;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-left: 1px solid black;
+  padding-left: 1em;
+}
+
+p {
+  flex-grow: 1;
+  justify-content: space-around;
+}

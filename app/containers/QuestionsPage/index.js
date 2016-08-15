@@ -7,14 +7,33 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Helmet from 'react-helmet'
 
-import messages from './messages'
-import { FormattedMessage } from 'react-intl'
-import Button from 'components/Button'
 import H1 from 'components/H1'
+import Question from '../Question'
 
-import styles from './styles.css'
+import { createStructuredSelector } from 'reselect'
 
-export class SettingsPage extends React.Component {
+import {
+  selectFetching,
+  selectError,
+  selectQuestions,
+  selectCategories,
+  selectQuestionsByCategory,
+  selectViewing
+} from './selectors'
+
+import {
+  requestQuestions,
+  changeViewing
+} from './actions'
+
+// import styles from './styles.css'
+
+export class QuestionsPage extends React.Component {
+
+  componentDidMount () {
+    const { onMount } = this.props
+    onMount()
+  }
   /**
    * Changes the route
    *
@@ -31,79 +50,62 @@ export class SettingsPage extends React.Component {
     this.openRoute('/')
   };
 
+  _renderCategories = () => {
+    const { categories, changeViewing } = this.props
+    return categories && categories.map(category => {
+      return <a key={category._id} onClick={() => changeViewing(category._id)}>{category.name}</a>
+    })
+  }
+
+  _renderQuestions = () => {
+    const { questionsByCategory, viewing } = this.props
+    if (!questionsByCategory || !viewing) return
+    return questionsByCategory[viewing].map(question => {
+      return <Question key={question._id} {...question} />
+    })
+  }
+
   render () {
     return (
       <div>
         <Helmet
-          title='Settings'
+          title='Questions'
           meta={[
-            { name: 'description', content: 'Change settings for your interview' }
+            { name: 'description', content: 'A list of available questions for interviews' }
           ]}
         />
         <H1>
-          <FormattedMessage {...messages.header} />
+          Questions
         </H1>
-        <ul className={styles.list}>
-          <li className={styles.listItem}>
-            <p className={styles.listItemTitle}>
-              <FormattedMessage {...messages.scaffoldingHeader} />
-            </p>
-            <p>
-              <FormattedMessage {...messages.scaffoldingMessage} />
-            </p>
-          </li>
 
-          <li className={styles.listItem}>
-            <p className={styles.listItemTitle}>
-              <FormattedMessage {...messages.feedbackHeader} />
-            </p>
-            <p>
-              <FormattedMessage {...messages.feedbackMessage} />
-            </p>
-          </li>
-
-          <li className={styles.listItem}>
-            <p className={styles.listItemTitle}>
-              <FormattedMessage {...messages.routingHeader} />
-            </p>
-            <p>
-              <FormattedMessage {...messages.routingMessage} />
-            </p>
-          </li>
-
-          <li className={styles.listItem}>
-            <p className={styles.listItemTitle}>
-              <FormattedMessage {...messages.networkHeader} />
-            </p>
-            <p>
-              <FormattedMessage {...messages.networkMessage} />
-            </p>
-          </li>
-
-          <li className={styles.listItem}>
-            <p className={styles.listItemTitle}>
-              <FormattedMessage {...messages.intlHeader} />
-            </p>
-            <p>
-              <FormattedMessage {...messages.intlMessage} />
-            </p>
-          </li>
-        </ul>
-        <Button handleRoute={this.openHomePage}>
-          <FormattedMessage {...messages.homeButton} />
-        </Button>
+        {this._renderCategories()}
+        {this._renderQuestions()}
       </div>
     )
   }
 }
-SettingsPage.propTypes = {
+QuestionsPage.propTypes = {
   changeRoute: React.PropTypes.func
 }
 
+const mapStateToProps = createStructuredSelector({
+  questions: selectQuestions(),
+  categories: selectCategories(),
+  questionsByCategory: selectQuestionsByCategory(),
+  viewing: selectViewing(),
+  fetching: selectFetching(),
+  error: selectError()
+})
+
 function mapDispatchToProps (dispatch) {
   return {
-    changeRoute: (url) => dispatch(push(url))
+    onMount: () => dispatch(requestQuestions()),
+    changeViewing: (categoryID) => dispatch(changeViewing(categoryID)),
+    changeRoute: (url) => dispatch(push(url)),
+
+    dispatch
   }
 }
 
-export default connect(null, mapDispatchToProps)(SettingsPage)
+// Wrap the component to inject dispatch and state into it
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsPage)

@@ -74,9 +74,22 @@ export default function createRoutes (store) {
       path: '/questions',
       name: 'questions',
       getComponent (nextState, cb) {
-        System.import('containers/QuestionsPage')
-          .then(loadModule(cb))
-          .catch(errorLoading)
+        const importModules = Promise.all([
+          System.import('containers/QuestionsPage/reducer'),
+          System.import('containers/QuestionsPage/sagas'),
+          System.import('containers/QuestionsPage')
+        ])
+
+        const renderRoute = loadModule(cb)
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('questions', reducer.default)
+          injectSagas(sagas.default)
+
+          renderRoute(component)
+        })
+
+        importModules.catch(errorLoading)
       }
     },
     {
