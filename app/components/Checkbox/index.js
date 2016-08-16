@@ -3,21 +3,57 @@ import React from 'react'
 import styles from './styles.css'
 
 function Checkbox (props) {
-  let { position, type, question, label, defaultValue } = props
+  const { position, type, question, label, defaultValue, editing, toggleEditing, editQuestion, editPlaceholder } = props
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.level}>
-        <p>Level {position + 1}</p>
+  if (editing) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.level}>
+          <p>Level {position + 1}</p>
+          <button onClick={toggleEditing}>Confirm</button>
+        </div>
+        <div className={styles.innerContainer}>
+          <p>Type: {type}</p>
+          <p>
+            Question:
+            <input
+              value={question}
+              onChange={(e) => editQuestion(e.target.value)}
+            />
+          </p>
+          <p>
+            Label:
+            <input
+              value={label}
+              onChange={(e) => editPlaceholder(e.target.value)}
+            />
+          </p>
+          <p>
+            Default Value:
+            <input
+              value={defaultValue}
+              onChange={(e) => editPlaceholder(e.target.value)}
+            />
+          </p>
+        </div>
       </div>
-      <div className={styles.innerContainer}>
-        <p>Type: {type}</p>
-        <p>Question: {question}</p>
-        <p>Label: {label}</p>
-        <p>defaultValue: {defaultValue.toString()}</p>
+    )
+  } else {
+    return (
+      <div className={styles.container}>
+        <div className={styles.level}>
+          <p>Level {position + 1}</p>
+          <button onClick={toggleEditing}>Edit</button>
+        </div>
+        <div className={styles.innerContainer}>
+          <p>Type: {type}</p>
+          <p>Question: {question}</p>
+          <p>Label: {label}</p>
+          <p>defaultValue: {defaultValue.toString()}</p>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 Checkbox.propTypes = {

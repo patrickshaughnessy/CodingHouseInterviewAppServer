@@ -1,26 +1,35 @@
 .container {
   display: flex;
   align-items: center;
-  text-align: left;
-  box-shadow: 1px 1px 3px black;
 }
 
 .level {
   flex: 1;
-  padding-left: 1em;
 }
 
-.innerContainer {
-  padding: 5px;
-  display: flex;
+.details {
   flex: 4;
-  flex-direction: column;
-  flex-wrap: wrap;
   border-left: 1px solid black;
-  padding-left: 1em;
+  flex-direction: column;
+  padding: 0 1em;
+}
+
+.section {
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+}
+
+.innerSection {
+  flex: 4;
 }
 
 p {
-  flex-grow: 1;
-  justify-content: space-around;
+  flex: 1;
+}
+
+input {
+  margin: 5px;
+  padding: 2px;
+  border: 1px solid black;
 }

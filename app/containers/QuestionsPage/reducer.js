@@ -4,6 +4,7 @@ import {
   RECEIVE_QUESTIONS_FAILURE,
   CHANGE_VIEWING
 } from './constants'
+
 import { fromJS } from 'immutable'
 
 // The initial state of the App

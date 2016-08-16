@@ -33,6 +33,23 @@ exports.update = (req, res) => {
   })
 }
 
+exports.editLevel = (req, res) => {
+  console.log(req.body)
+  Question.findOneAndUpdate(
+    { '_id': req.body.questionID, 'levels._id': req.body.levelID },
+    {
+      '$set': {
+        'levels.$': req.body.level
+      }
+    },
+    { new: true },
+    (err, question) => {
+      if (err) return handleError(res, err)
+      return res.status(200).json(question)
+    }
+  )
+}
+
 exports.delete = (req, res) => {
   Question.findByIdAndRemove(req.params.id, (err, removed) => {
     return res.status(err ? 400 : 200).json(err || 'deleted!')

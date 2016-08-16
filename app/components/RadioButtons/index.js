@@ -3,20 +3,49 @@ import React from 'react'
 import styles from './styles.css'
 
 function RadioButtons (props) {
-  let { position, type, question, options } = props
+  const { position, type, question, options, editing, toggleEditing, editQuestion, editPlaceholder } = props
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.level}>
-        <p>Level {position + 1}</p>
+  if (editing) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.level}>
+          <p>Level {position + 1}</p>
+          <button onClick={toggleEditing}>Confirm</button>
+        </div>
+        <div className={styles.innerContainer}>
+          <p>Type: {type}</p>
+          <p>
+            Question:
+            <input
+              value={question}
+              onChange={(e) => editQuestion(e.target.value)}
+            />
+          </p>
+          <p>
+            Options:
+            <input
+              value={options}
+              onChange={(e) => editPlaceholder(e.target.value)}
+            />
+          </p>
+        </div>
       </div>
-      <div className={styles.innerContainer}>
-        <p>Type: {type}</p>
-        <p>Question: {question}</p>
-        <p>Options: {options}</p>
+    )
+  } else {
+    return (
+      <div className={styles.container}>
+        <div className={styles.level}>
+          <p>Level {position + 1}</p>
+          <button onClick={toggleEditing}>Edit</button>
+        </div>
+        <div className={styles.innerContainer}>
+          <p>Type: {type}</p>
+          <p>Question: {question}</p>
+          <p>Options: {options}</p>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 RadioButtons.propTypes = {

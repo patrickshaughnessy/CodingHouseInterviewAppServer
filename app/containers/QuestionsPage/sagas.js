@@ -1,8 +1,11 @@
 
 import { take, call, put, fork } from 'redux-saga/effects'
-// import { LOCATION_CHANGE } from 'react-router-redux'
+
 import { REQUEST_QUESTIONS } from './constants'
 import { receiveQuestionsSuccess, receiveQuestionsFailure } from './actions'
+
+// import { UPDATE_LEVEL } from '../Level/constants'
+import levelsSaga from '../Level/sagas'
 
 import request from 'utils/request'
 // import { selectUser } from '../Login/selectors'
@@ -36,20 +39,12 @@ export function * watchQuestions () {
   }
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
 export function * questionsSaga () {
-  // // Fork watcher so we can continue execution
-  // const watcher = yield fork(watch)
   yield fork(watchQuestions)
-
-  // // Suspend execution until location changes
-  // yield take(LOCATION_CHANGE)
-  // yield cancel(watcher)
 }
 
 // Bootstrap sagas
 export default [
-  questionsSaga
+  questionsSaga,
+  ...levelsSaga
 ]

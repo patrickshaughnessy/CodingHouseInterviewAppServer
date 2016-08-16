@@ -1,27 +1,19 @@
 import React, { Component } from 'react'
-import InputBox from 'components/InputBox'
-import RadioButtons from 'components/RadioButtons'
-import Slider from 'components/Slider'
-import Checkbox from 'components/Checkbox'
+import { createStructuredSelector } from 'reselect'
+import { connect } from 'react-redux'
+
+import Level from '../Level'
 
 import styles from './styles.css'
 
 class Question extends Component {
 
   _renderLevels = () => {
-    const { levels } = this.props
+    const { levels, _id } = this.props
 
     return levels.map((level, i) => {
-      switch (level.type) {
-        case 'INPUT_BOX':
-          return <InputBox key={level._id} position={i} {...level} />
-        case 'RADIO':
-          return <RadioButtons key={level._id} position={i} {...level} />
-        case 'SLIDER':
-          return <Slider key={level._id} position={i} {...level} />
-        case 'CHECKBOX':
-          return <Checkbox key={level._id} position={i} {...level} />
-      }
+      level.questionID = _id
+      return <Level key={level._id} position={i} {...level} />
     })
   }
 
@@ -42,7 +34,18 @@ class Question extends Component {
 
 Question.propTypes = {
   className: React.PropTypes.string,
-  levels: React.PropTypes.array
+  levels: React.PropTypes.array,
+  editQuestion: React.PropTypes.func
 }
 
-export default Question
+const mapStateToProps = createStructuredSelector({
+
+})
+
+function mapDispatchToProps (dispatch) {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Question)
