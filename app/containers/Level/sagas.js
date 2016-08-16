@@ -1,7 +1,7 @@
 
-import { take, call, fork } from 'redux-saga/effects'
+import { take, call, put, fork } from 'redux-saga/effects'
 import { UPDATE_LEVEL } from './constants'
-// import { updateLevelSuccess, updateLevelFailure } from './actions'
+import { updateLevelSuccess, updateLevelFailure } from './actions'
 
 import request from 'utils/request'
 
@@ -23,11 +23,10 @@ export function * workerLevels (payload) {
 
   if (!resp.err) {
     console.log('OK still need to fix reducer')
-    // yield put(updateLevelSuccess(resp.data))
+    yield put(updateLevelSuccess(resp.data))
   } else {
-    console.log('FAIL')
-    // const { message } = resp.err
-    // yield put(updateLevelFailure({ message }))
+    const { message } = resp.err
+    yield put(updateLevelFailure({ message }))
   }
 }
 

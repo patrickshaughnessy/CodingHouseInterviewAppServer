@@ -7,20 +7,28 @@ import {
 
 import { fromJS } from 'immutable'
 
-// The initial state of the App
 const initialState = fromJS({
   questions: null,
   categories: null,
+  categoriesById: null,
+  questionsById: null,
   questionsByCategory: null,
   viewing: null,
   fetching: null,
   error: null
 })
 
+const mapItemsToIds = (items) => {
+  return items.reduce((a, item) => {
+    a[item._id] = item
+    return a
+  }, {})
+}
+
 const mapQuestionsToCategories = (questions) => {
   return questions.reduce((a, question) => {
     let { category: {_id: _id} } = question
-    a[_id] = a[_id] ? a[_id].concat(question) : [question]
+    a[_id] = a[_id] ? a[_id].concat(question._id) : [question._id]
     return a
   }, {})
 }
@@ -36,8 +44,10 @@ function questionsReducer (state = initialState, action) {
       const { questions, categories } = action
       return state
         .set('fetching', false)
-        .set('categories', categories)
         .set('questions', questions)
+        .set('questionsById', mapItemsToIds(questions))
+        .set('categories', categories)
+        .set('categoriesById', mapItemsToIds(categories))
         .set('questionsByCategory', mapQuestionsToCategories(questions))
         .set('viewing', categories && categories[0]._id)
     case RECEIVE_QUESTIONS_FAILURE:

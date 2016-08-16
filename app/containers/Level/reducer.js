@@ -4,20 +4,17 @@ import {
   UPDATE_LEVEL_FAILURE
 } from './constants'
 
-import {
-  selectQuestionsState
-} from '../QuestionsPage/selectors'
-
-function levelsReducer (state = selectQuestionsState(), action) {
+function levelsReducer (state = {}, action) {
   switch (action.type) {
     case UPDATE_LEVEL:
       return state
         .set('fetching', false)
     case UPDATE_LEVEL_SUCCESS:
-      const { _id, category } = action.question
+      const { _id } = action.question
+      console.log('here', action)
       return state
         .set('fetching', false)
-        .setIn(['questionsByCategory', category._id, _id])
+        .setIn(['questionsById', _id], action.question)
     case UPDATE_LEVEL_FAILURE:
       return state
         .set('fetching', false)

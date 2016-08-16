@@ -3,6 +3,7 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 import { getAsyncInjectors } from './utils/asyncInjectors'
+import { compose, combineReducers } from 'redux'
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err) // eslint-disable-line no-console
@@ -76,14 +77,16 @@ export default function createRoutes (store) {
       getComponent (nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/QuestionsPage/reducer'),
+          System.import('containers/Level/reducer'),
           System.import('containers/QuestionsPage/sagas'),
           System.import('containers/QuestionsPage')
         ])
 
         const renderRoute = loadModule(cb)
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('questions', reducer.default)
+        importModules.then(([questionsReducer, levelReducer, sagas, component]) => {
+          injectReducer('questions', questionsReducer.default)
+          // injectReducer('questions', levelReducer.default)
           injectSagas(sagas.default)
 
           renderRoute(component)

@@ -21,9 +21,19 @@ const selectQuestions = () => createSelector(
   (questionsState) => questionsState.get('questions')
 )
 
+const selectQuestionsById = () => createSelector(
+  selectQuestionsState(),
+  (questionsState) => questionsState.get('questionsById')
+)
+
 const selectCategories = () => createSelector(
   selectQuestionsState(),
   (questionsState) => questionsState.get('categories')
+)
+
+const selectCategoriesById = () => createSelector(
+  selectQuestionsState(),
+  (questionsState) => questionsState.get('categoriesById')
 )
 
 const selectQuestionsByCategory = () => createSelector(
@@ -41,7 +51,9 @@ export {
   selectFetching,
   selectError,
   selectQuestions,
+  selectQuestionsById,
   selectCategories,
+  selectCategoriesById,
   selectQuestionsByCategory,
   selectViewing
 }

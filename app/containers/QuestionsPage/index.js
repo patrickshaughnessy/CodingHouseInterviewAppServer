@@ -16,7 +16,9 @@ import {
   selectFetching,
   selectError,
   selectQuestions,
+  selectQuestionsById,
   selectCategories,
+  selectCategoriesById,
   selectQuestionsByCategory,
   selectViewing
 } from './selectors'
@@ -58,10 +60,10 @@ export class QuestionsPage extends React.Component {
   }
 
   _renderQuestions = () => {
-    const { questionsByCategory, viewing } = this.props
+    const { questionsById, questionsByCategory, viewing } = this.props
     if (!questionsByCategory || !viewing) return
-    return questionsByCategory[viewing].map(question => {
-      return <Question key={question._id} {...question} />
+    return questionsByCategory[viewing].map(id => {
+      return <Question key={id} {...questionsById[id]} />
     })
   }
 
@@ -90,7 +92,9 @@ QuestionsPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   questions: selectQuestions(),
+  questionsById: selectQuestionsById(),
   categories: selectCategories(),
+  categoriesById: selectCategoriesById(),
   questionsByCategory: selectQuestionsByCategory(),
   viewing: selectViewing(),
   fetching: selectFetching(),
