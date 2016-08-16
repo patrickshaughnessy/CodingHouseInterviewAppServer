@@ -3,7 +3,12 @@ import React from 'react'
 import styles from './styles.css'
 
 function RadioButtons (props) {
-  const { position, type, question, options, editing, toggleEditing, editQuestion, editPlaceholder } = props
+  const {
+    position, type,
+    editing, toggleEditing,
+    question, options, defaultValue,
+    editQuestion, editOptions, editDefaultValue
+  } = props
 
   if (editing) {
     return (
@@ -24,8 +29,15 @@ function RadioButtons (props) {
           <p>
             Options:
             <input
-              value={options}
-              onChange={(e) => editPlaceholder(e.target.value)}
+              value={options.join(', ')}
+              onChange={(e) => editOptions(e.target.value)}
+            />
+          </p>
+          <p>
+            Default Value:
+            <input
+              value={defaultValue}
+              onChange={(e) => editDefaultValue(e.target.value.toString())}
             />
           </p>
         </div>
@@ -41,7 +53,8 @@ function RadioButtons (props) {
         <div className={styles.innerContainer}>
           <p>Type: {type}</p>
           <p>Question: {question}</p>
-          <p>Options: {options}</p>
+          <p>Options: {options.join(', ')}</p>
+          <p>Default Value: {defaultValue || '--'}</p>
         </div>
       </div>
     )

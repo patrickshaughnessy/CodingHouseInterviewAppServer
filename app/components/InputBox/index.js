@@ -54,7 +54,7 @@ function InputBox (props) {
           </div>
           <div className={styles.section}>
             <p>Placeholder: </p>
-            <p className={styles.innerSection}>{placeholder}</p>
+            <p className={styles.innerSection}>{placeholder || '--'}</p>
           </div>
         </div>
       </div>

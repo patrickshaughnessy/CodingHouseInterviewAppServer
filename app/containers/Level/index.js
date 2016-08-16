@@ -29,19 +29,22 @@ class Level extends Component {
       const { updateLevel, questionID, _id } = this.props
 
       let level = Object.assign({}, this.props)
+      let shouldSend
       for (let key in level) {
-        if (this.state[key]) {
+        if (this.state[key] || this.state[key] === '') {
+          shouldSend = true
           level[key] = this.state[key]
         }
       }
 
-      let payload = {
-        questionID: questionID,
-        levelID: _id,
-        level: level
+      if (shouldSend) {
+        let payload = {
+          questionID: questionID,
+          levelID: _id,
+          level: level
+        }
+        updateLevel(payload)
       }
-      console.log(payload)
-      updateLevel(payload)
     }
     this.setState({ editing: !editing })
   }
@@ -54,23 +57,41 @@ class Level extends Component {
     this.setState({ placeholder })
   }
 
+  _editOptions = (options) => {
+    this.setState({ options: options.split(', ') })
+  }
+
+  _editDefaultValue = (defaultValue) => {
+    this.setState({ defaultValue })
+  }
+
+  _getCurrentValue = (type) => {
+    if (this.state[type]) {
+      return this.state[type]
+    } else if (this.state[type] === '') {
+      return ''
+    } else {
+      return this.props[type]
+    }
+  }
+
   _renderLevel = () => {
     const { type, _id, position } = this.props
     const { editing } = this.state
-    const question = this.state.question || this.props.question
-    const placeholder = this.state.placeholder || this.props.placeholder
-    const options = this.state.options || this.props.options
-    const defaultValue = this.state.defaultValue || this.props.defaultValue
-    const range = this.state.range || this.props.range
+    const question = this._getCurrentValue('question')
+    const options = this._getCurrentValue('options')
+    const range = this._getCurrentValue('range')
+    const placeholder = this._getCurrentValue('placeholder')
+    const defaultValue = this._getCurrentValue('defaultValue')
 
     switch (type) {
       case 'INPUT_BOX':
         const inputProps = {
+          type,
+          position,
+          editing,
           question,
           placeholder,
-          position,
-          type,
-          editing,
           toggleEditing: this._toggleEditing,
           editQuestion: this._editQuestion,
           editPlaceholder: this._editPlaceholder
@@ -78,13 +99,16 @@ class Level extends Component {
         return <InputBox key={_id} {...inputProps} />
       case 'RADIO':
         const radioProps = {
+          type,
+          position,
+          editing,
           question,
           options,
-          position,
-          type,
-          editing,
+          defaultValue,
           toggleEditing: this._toggleEditing,
-          editQuestion: this._editQuestion
+          editQuestion: this._editQuestion,
+          editOptions: this._editOptions,
+          editDefaultValue: this._editDefaultValue
         }
         return <RadioButtons key={_id} {...radioProps} />
       case 'SLIDER':
