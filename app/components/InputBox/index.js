@@ -3,7 +3,12 @@ import React from 'react'
 import styles from './styles.css'
 
 function InputBox (props) {
-  const { position, type, question, placeholder, editing, toggleEditing, editQuestion, editPlaceholder } = props
+  const {
+    position, type,
+    editing, toggleEditing,
+    question, placeholder,
+    editQuestion, editPlaceholder
+  } = props
 
   if (editing) {
     return (
