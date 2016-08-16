@@ -61,9 +61,9 @@ export class QuestionsPage extends React.Component {
 
   _renderQuestions = () => {
     const { questionsById, questionsByCategory, viewing } = this.props
-    if (!questionsByCategory || !viewing) return
+    if (!questionsById || !questionsByCategory || !viewing) return
     return questionsByCategory[viewing].map(id => {
-      return <Question key={id} {...questionsById[id]} />
+      return <Question key={id} {...questionsById.toJS()[id]} />
     })
   }
 

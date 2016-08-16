@@ -34,7 +34,6 @@ exports.update = (req, res) => {
 }
 
 exports.editLevel = (req, res) => {
-  console.log(req.body)
   Question.findOneAndUpdate(
     { '_id': req.body.questionID, 'levels._id': req.body.levelID },
     {

@@ -5,6 +5,7 @@ import {
 } from './constants'
 
 function levelsReducer (state = {}, action) {
+  console.log(action)
   switch (action.type) {
     case UPDATE_LEVEL:
       return state

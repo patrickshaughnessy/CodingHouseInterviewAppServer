@@ -22,7 +22,7 @@ export function * workerLevels (payload) {
   const resp = yield call(request, requestURL, requestOptions)
 
   if (!resp.err) {
-    console.log('OK still need to fix reducer')
+    console.log('OK still need to fix reducer', resp.data)
     yield put(updateLevelSuccess(resp.data))
   } else {
     const { message } = resp.err

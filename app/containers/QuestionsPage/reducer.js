@@ -5,6 +5,12 @@ import {
   CHANGE_VIEWING
 } from './constants'
 
+import {
+  UPDATE_LEVEL,
+  UPDATE_LEVEL_SUCCESS,
+  UPDATE_LEVEL_FAILURE
+} from '../Level/constants'
+
 import { fromJS } from 'immutable'
 
 const initialState = fromJS({
@@ -45,7 +51,7 @@ function questionsReducer (state = initialState, action) {
       return state
         .set('fetching', false)
         .set('questions', questions)
-        .set('questionsById', mapItemsToIds(questions))
+        .setIn(['questionsById'], fromJS(mapItemsToIds(questions)))
         .set('categories', categories)
         .set('categoriesById', mapItemsToIds(categories))
         .set('questionsByCategory', mapQuestionsToCategories(questions))
@@ -57,6 +63,18 @@ function questionsReducer (state = initialState, action) {
     case CHANGE_VIEWING:
       return state
         .set('viewing', action.categoryID)
+    case UPDATE_LEVEL:
+      return state
+        .set('fetching', false)
+    case UPDATE_LEVEL_SUCCESS:
+      const { _id } = action.question
+      return state
+        .set('fetching', false)
+        .setIn(['questionsById', _id], action.question)
+    case UPDATE_LEVEL_FAILURE:
+      return state
+        .set('fetching', false)
+        .set('error', action.error)
     default:
       return state
   }
