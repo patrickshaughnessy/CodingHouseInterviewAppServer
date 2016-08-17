@@ -3,7 +3,12 @@ import React from 'react'
 import styles from './styles.css'
 
 function Slider (props) {
-  const { position, type, question, defaultValue, range, editing, toggleEditing, editQuestion, editPlaceholder } = props
+  const {
+    position, type,
+    editing, toggleEditing,
+    question, range, defaultValue,
+    editQuestion, editRange, editDefaultValue
+  } = props
 
   if (editing) {
     return (
@@ -12,29 +17,39 @@ function Slider (props) {
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Confirm</button>
         </div>
-        <div className={styles.innerContainer}>
-          <p>Type: {type}</p>
-          <p>
-            Question:
+        <div className={styles.details}>
+          <div className={styles.section}>
+            <p>Type: </p>
+            <p className={styles.innerSection}>{type}</p>
+          </div>
+          <div className={styles.section}>
+            <p>Question: </p>
             <input
+              className={styles.innerSection}
               value={question}
               onChange={(e) => editQuestion(e.target.value)}
             />
-          </p>
-          <p>
-            Range:
+          </div>
+          <div className={styles.section}>
+            <p>Range: </p>
             <input
+              type='number'
+              min='1'
+              className={styles.innerSection}
               value={range}
-              onChange={(e) => editPlaceholder(e.target.value)}
+              onChange={(e) => editRange(e.target.value)}
             />
-          </p>
-          <p>
-            Default Value:
+          </div>
+          <div className={styles.section}>
+            <p>Default Value: </p>
             <input
+              type='number'
+              min='1'
+              className={styles.innerSection}
               value={defaultValue}
-              onChange={(e) => editPlaceholder(e.target.value)}
+              onChange={(e) => editDefaultValue(e.target.value)}
             />
-          </p>
+          </div>
         </div>
       </div>
     )
@@ -45,11 +60,23 @@ function Slider (props) {
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Edit</button>
         </div>
-        <div className={styles.innerContainer}>
-          <p>Type: {type}</p>
-          <p>Question: {question}</p>
-          <p>Range: {range}</p>
-          <p>Default Value: {defaultValue.toString()}</p>
+        <div className={styles.details}>
+          <div className={styles.section}>
+            <p>Type: </p>
+            <p className={styles.innerSection}>{type}</p>
+          </div>
+          <div className={styles.section}>
+            <p>Question: </p>
+            <p className={styles.innerSection}>{question}</p>
+          </div>
+          <div className={styles.section}>
+            <p>Range: </p>
+            <p className={styles.innerSection}>{range}</p>
+          </div>
+          <div className={styles.section}>
+            <p>Default Value: </p>
+            <p className={styles.innerSection}>{defaultValue}</p>
+          </div>
         </div>
       </div>
     )

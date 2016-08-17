@@ -69,6 +69,10 @@ class Level extends Component {
     this.setState({ label })
   }
 
+  _editRange = (range) => {
+    this.setState({ range })
+  }
+
   _getCurrentValue = (type) => {
     if (this.state[type]) {
       return this.state[type]
@@ -120,14 +124,16 @@ class Level extends Component {
         return <RadioButtons key={_id} {...radioProps} />
       case 'SLIDER':
         const sliderProps = {
-          question,
-          defaultValue,
-          position,
-          range,
           type,
+          position,
           editing,
+          question,
+          range,
+          defaultValue,
           toggleEditing: this._toggleEditing,
-          editQuestion: this._editQuestion
+          editQuestion: this._editQuestion,
+          editRange: this._editRange,
+          editDefaultValue: this._editDefaultValue
         }
         return <Slider key={_id} {...sliderProps} />
       case 'CHECKBOX':
