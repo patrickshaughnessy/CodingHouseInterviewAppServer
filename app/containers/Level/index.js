@@ -65,11 +65,17 @@ class Level extends Component {
     this.setState({ defaultValue })
   }
 
+  _editLabel = (label) => {
+    this.setState({ label })
+  }
+
   _getCurrentValue = (type) => {
     if (this.state[type]) {
       return this.state[type]
     } else if (this.state[type] === '') {
       return ''
+    } else if (this.state[type] === false) {
+      return false
     } else {
       return this.props[type]
     }
@@ -81,6 +87,7 @@ class Level extends Component {
     const question = this._getCurrentValue('question')
     const options = this._getCurrentValue('options')
     const range = this._getCurrentValue('range')
+    const label = this._getCurrentValue('label')
     const placeholder = this._getCurrentValue('placeholder')
     const defaultValue = this._getCurrentValue('defaultValue')
 
@@ -116,6 +123,7 @@ class Level extends Component {
           question,
           defaultValue,
           position,
+          range,
           type,
           editing,
           toggleEditing: this._toggleEditing,
@@ -124,14 +132,17 @@ class Level extends Component {
         return <Slider key={_id} {...sliderProps} />
       case 'CHECKBOX':
         const checkboxProps = {
-          question,
-          defaultValue,
-          range,
-          position,
+          _id,
           type,
+          position,
           editing,
+          question,
+          label,
+          defaultValue,
           toggleEditing: this._toggleEditing,
-          editQuestion: this._editQuestion
+          editQuestion: this._editQuestion,
+          editLabel: this._editLabel,
+          editDefaultValue: this._editDefaultValue
         }
         return <Checkbox key={_id} {...checkboxProps} />
     }
