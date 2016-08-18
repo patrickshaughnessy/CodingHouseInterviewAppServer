@@ -5,7 +5,7 @@ import styles from './styles.css'
 function Checkbox (props) {
   const {
     position, type, _id,
-    editing, toggleEditing,
+    editing, toggleEditing, deleteLevel,
     question, label, defaultValue,
     editQuestion, editLabel, editDefaultValue
   } = props
@@ -66,7 +66,7 @@ function Checkbox (props) {
         <div className={styles.level}>
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Edit</button>
-          <button>Delete</button>
+          <button onClick={deleteLevel}>Delete</button>
         </div>
         <div className={styles.details}>
           <div className={styles.section}>

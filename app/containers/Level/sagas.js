@@ -9,8 +9,6 @@ import request from 'utils/request'
 export function * workerUpdateLevels (payload) {
   const requestURL = '/api/questions/levels'
 
-  console.log('here', payload)
-
   const requestOptions = {
     method: 'PUT',
     headers: {
@@ -23,7 +21,6 @@ export function * workerUpdateLevels (payload) {
   const resp = yield call(request, requestURL, requestOptions)
 
   if (!resp.err) {
-    console.log('OK still need to fix reducer', resp.data)
     yield put(updateLevelSuccess(resp.data))
   } else {
     const { message } = resp.err
@@ -67,7 +64,6 @@ export function * workerDeleteLevels (levelID) {
 export function * watchDeleteLevels () {
   while (true) {
     const { levelID } = yield take(DELETE_LEVEL)
-    console.log(levelID)
     yield call(() => workerDeleteLevels(levelID))
   }
 }

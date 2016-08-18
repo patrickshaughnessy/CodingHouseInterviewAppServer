@@ -72,17 +72,6 @@ function questionsReducer (state = initialState, action) {
     case CHANGE_VIEWING:
       return state
         .set('viewing', action.categoryID)
-    case UPDATE_LEVEL:
-      return state
-        .set('fetching', true)
-    case UPDATE_LEVEL_SUCCESS:
-      return state
-        .set('fetching', false)
-        .setIn(['questionsById', action.question._id], action.question)
-    case UPDATE_LEVEL_FAILURE:
-      return state
-        .set('fetching', false)
-        .set('error', action.error)
     case ADD_LEVEL:
       return state
         .set('fetching', true)
@@ -91,6 +80,17 @@ function questionsReducer (state = initialState, action) {
         .set('fetching', false)
         .setIn(['questionsById', action.question._id], action.question)
     case ADD_LEVEL_FAILURE:
+      return state
+        .set('fetching', false)
+        .set('error', action.error)
+    case UPDATE_LEVEL:
+      return state
+        .set('fetching', true)
+    case UPDATE_LEVEL_SUCCESS:
+      return state
+        .set('fetching', false)
+        .setIn(['questionsById', action.question._id], action.question)
+    case UPDATE_LEVEL_FAILURE:
       return state
         .set('fetching', false)
         .set('error', action.error)

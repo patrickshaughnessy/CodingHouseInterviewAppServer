@@ -6,51 +6,21 @@ function InputBox (props) {
   const {
     position, type,
     editing, toggleEditing, deleteLevel,
-    isForm, changeType, addLevel,
     question, placeholder,
     editQuestion, editPlaceholder
   } = props
-
-  const setTypeDisplay = function (isForm, type, changeType) {
-    if (isForm) {
-      return (
-        <select value={type} onChange={(e) => changeType(e.target.value)} className={styles.innerSection}>
-          <option value='INPUT_BOX'>INPUT_BOX</option>
-          <option value='CHECKBOX'>CHECKBOX</option>
-          <option value='RADIO'>RADIO</option>
-          <option value='SLIDER'>SLIDER</option>
-        </select>
-      )
-    } else {
-      return (
-        <p className={styles.innerSection}>{type}</p>
-      )
-    }
-  }
-
-  const setButtonDisplay = function (isForm, addLevel, toggleEditing) {
-    if (isForm) {
-      return (
-        <button onClick={addLevel}>Add</button>
-      )
-    } else {
-      return (
-        <button onClick={toggleEditing}>Confirm</button>
-      )
-    }
-  }
 
   if (editing) {
     return (
       <div className={styles.container}>
         <div className={styles.level}>
           <p>Level {position + 1}</p>
-          {setButtonDisplay(isForm, addLevel, toggleEditing)}
+          <button onClick={toggleEditing}>Confirm</button>
         </div>
         <div className={styles.details}>
           <div className={styles.section}>
             <p>Type: </p>
-            {setTypeDisplay(isForm, type, changeType)}
+            <p className={styles.innerSection}>{type}</p>
           </div>
           <div className={styles.section}>
             <p>Question: </p>

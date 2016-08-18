@@ -20,7 +20,6 @@ export function * workerNewLevelForm (payload) {
   const resp = yield call(request, requestURL, requestOptions)
 
   if (!resp.err) {
-    console.log('OK in new level form saga', resp.data)
     yield put(addLevelSuccess(resp.data))
   } else {
     const { message } = resp.err

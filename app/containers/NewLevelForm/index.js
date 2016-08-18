@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
+import CheckboxForm from 'components/CheckboxForm'
 import InputBoxForm from 'components/InputBoxForm'
-// import RadioButtons from 'components/RadioButtons'
-// import Slider from 'components/Slider'
-// import Checkbox from 'components/Checkbox'
+import RadioButtonsForm from 'components/RadioButtonsForm'
+import SliderForm from 'components/SliderForm'
 
 import {
   addLevel
@@ -66,58 +66,22 @@ class Level extends Component {
     const { type } = this.state
     const { position } = this.props
 
+    const levelFormProps = {
+      type,
+      position,
+      changeType: this._changeType,
+      addLevel: this._addLevel
+    }
+
     switch (type) {
+      case 'CHECKBOX':
+        return <CheckboxForm {...levelFormProps} />
       case 'INPUT_BOX':
-        const inputProps = {
-          type,
-          position,
-          changeType: this._changeType,
-          addLevel: this._addLevel
-        }
-        return <InputBoxForm {...inputProps} />
-      // case 'RADIO':
-      //   const radioProps = {
-      //     type,
-      //     position,
-      //     editing,
-      //     question,
-      //     options,
-      //     defaultValue,
-      //     toggleEditing: this._toggleEditing,
-      //     editQuestion: this._editQuestion,
-      //     editOptions: this._editOptions,
-      //     editDefaultValue: this._editDefaultValue
-      //   }
-      //   return <RadioButtons key={_id} {...radioProps} />
-      // case 'SLIDER':
-      //   const sliderProps = {
-      //     type,
-      //     position,
-      //     editing,
-      //     question,
-      //     range,
-      //     defaultValue,
-      //     toggleEditing: this._toggleEditing,
-      //     editQuestion: this._editQuestion,
-      //     editRange: this._editRange,
-      //     editDefaultValue: this._editDefaultValue
-      //   }
-      //   return <Slider key={_id} {...sliderProps} />
-      // case 'CHECKBOX':
-      //   const checkboxProps = {
-      //     _id,
-      //     type,
-      //     position,
-      //     editing,
-      //     question,
-      //     label,
-      //     defaultValue,
-      //     toggleEditing: this._toggleEditing,
-      //     editQuestion: this._editQuestion,
-      //     editLabel: this._editLabel,
-      //     editDefaultValue: this._editDefaultValue
-      //   }
-      //   return <Checkbox key={_id} {...checkboxProps} />
+        return <InputBoxForm {...levelFormProps} />
+      case 'RADIO':
+        return <RadioButtonsForm {...levelFormProps} />
+      case 'SLIDER':
+        return <SliderForm {...levelFormProps} />
     }
   }
 

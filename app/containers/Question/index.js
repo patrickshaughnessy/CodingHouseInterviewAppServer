@@ -13,7 +13,7 @@ class Question extends Component {
     super(props)
 
     this.state = {
-      adding: true
+      adding: false
     }
   }
 
@@ -32,10 +32,6 @@ class Question extends Component {
     this.setState({adding: !adding})
   }
 
-  _renderNewLevelForm = () => {
-    return <h1>New Level Form</h1>
-  }
-
   render () {
     const { levels, _id } = this.props
     const { adding } = this.state
@@ -43,9 +39,8 @@ class Question extends Component {
       <li className={styles.container}>
         <div className={styles.title}>
           <h3>{levels[0].question} ({levels.length === 1 ? levels.length + ' level' : levels.length + ' levels'})</h3>
-          <button>Edit</button>
-          <button>Delete</button>
-          <button onClick={this._addLevel}>Add Level</button>
+          {/* <button>Delete</button> */}
+          <button onClick={this._addLevel}>{adding ? 'Finished' : 'Add Level'}</button>
         </div>
         <div className={styles.innerContainer}>
           {this._renderLevels()}

@@ -126,7 +126,8 @@ class Level extends Component {
           toggleEditing: this._toggleEditing,
           editQuestion: this._editQuestion,
           editOptions: this._editOptions,
-          editDefaultValue: this._editDefaultValue
+          editDefaultValue: this._editDefaultValue,
+          deleteLevel: this._deleteLevel
         }
         return <RadioButtons key={_id} {...radioProps} />
       case 'SLIDER':
@@ -140,7 +141,8 @@ class Level extends Component {
           toggleEditing: this._toggleEditing,
           editQuestion: this._editQuestion,
           editRange: this._editRange,
-          editDefaultValue: this._editDefaultValue
+          editDefaultValue: this._editDefaultValue,
+          deleteLevel: this._deleteLevel
         }
         return <Slider key={_id} {...sliderProps} />
       case 'CHECKBOX':
@@ -155,7 +157,8 @@ class Level extends Component {
           toggleEditing: this._toggleEditing,
           editQuestion: this._editQuestion,
           editLabel: this._editLabel,
-          editDefaultValue: this._editDefaultValue
+          editDefaultValue: this._editDefaultValue,
+          deleteLevel: this._deleteLevel
         }
         return <Checkbox key={_id} {...checkboxProps} />
     }

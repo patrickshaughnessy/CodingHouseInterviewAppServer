@@ -5,7 +5,7 @@ import styles from './styles.css'
 function RadioButtons (props) {
   const {
     position, type,
-    editing, toggleEditing,
+    editing, toggleEditing, deleteLevel,
     question, options, defaultValue,
     editQuestion, editOptions, editDefaultValue
   } = props
@@ -55,7 +55,7 @@ function RadioButtons (props) {
         <div className={styles.level}>
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Edit</button>
-          <button>Delete</button>
+          <button onClick={deleteLevel}>Delete</button>
         </div>
         <div className={styles.details}>
           <div className={styles.section}>

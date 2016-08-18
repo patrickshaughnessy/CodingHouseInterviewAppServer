@@ -54,6 +54,5 @@ button:active {
 }
 
 .title button {
-  flex: 1;
   margin: 1em;
 }

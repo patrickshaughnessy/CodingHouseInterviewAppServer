@@ -5,7 +5,7 @@ import styles from './styles.css'
 function Slider (props) {
   const {
     position, type,
-    editing, toggleEditing,
+    editing, toggleEditing, deleteLevel,
     question, range, defaultValue,
     editQuestion, editRange, editDefaultValue
   } = props
@@ -60,6 +60,7 @@ function Slider (props) {
         <div className={styles.level}>
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Edit</button>
+          <button onClick={deleteLevel}>Delete</button>
         </div>
         <div className={styles.details}>
           <div className={styles.section}>
