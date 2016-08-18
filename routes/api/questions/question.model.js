@@ -7,13 +7,13 @@ const QuestionSchema = new Schema({
   category: { type: Schema.Types.ObjectId, ref: 'Category' },
   levels: [
     {
-      type: {type: String},
-      question: String,
-      placeholder: String,
-      label: String,
-      options: [String],
+      type: { type: String, required: true },
+      question: { type: String, required: true },
+      placeholder: { type: String, default: '' },
+      label: { type: String, default: '' },
+      options: [{ type: String }],
       defaultValue: Schema.Types.Mixed,
-      range: Number
+      range: { type: Number, default: 10 }
     }
   ]
 })

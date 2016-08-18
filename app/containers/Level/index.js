@@ -36,8 +36,8 @@ class Level extends Component {
 
       let level = Object.assign({}, this.props)
       let shouldSend
-      for (let key in level) {
-        if (this.state[key] || this.state[key] === '') {
+      for (let key in this.state) {
+        if (key !== 'editing') {
           shouldSend = true
           level[key] = this.state[key]
         }
@@ -49,6 +49,7 @@ class Level extends Component {
           levelID: _id,
           level: level
         }
+        console.log(payload)
         updateLevel(payload)
       }
     }
@@ -72,6 +73,7 @@ class Level extends Component {
   }
 
   _editLabel = (label) => {
+    console.log(label)
     this.setState({ label })
   }
 

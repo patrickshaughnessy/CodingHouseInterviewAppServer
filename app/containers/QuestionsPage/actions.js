@@ -6,7 +6,10 @@ import {
   CHANGE_VIEWING,
   ADD_QUESTION,
   ADD_QUESTION_SUCCESS,
-  ADD_QUESTION_FAILURE
+  ADD_QUESTION_FAILURE,
+  ADD_CATEGORY,
+  ADD_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAILURE
 } from './constants'
 
 export function requestQuestions () {
@@ -53,6 +56,27 @@ export function addQuestionSuccess (question) {
 export function addQuestionFailure (error) {
   return {
     type: ADD_QUESTION_FAILURE,
+    error
+  }
+}
+
+export function addCategory (category) {
+  return {
+    type: ADD_CATEGORY,
+    category
+  }
+}
+
+export function addCategorySuccess (category) {
+  return {
+    type: ADD_CATEGORY_SUCCESS,
+    category
+  }
+}
+
+export function addCategoryFailure (error) {
+  return {
+    type: ADD_CATEGORY_FAILURE,
     error
   }
 }

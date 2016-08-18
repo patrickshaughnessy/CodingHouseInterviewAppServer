@@ -2,7 +2,13 @@
 import { take, call, put, fork } from 'redux-saga/effects'
 
 import { REQUEST_QUESTIONS, ADD_QUESTION } from './constants'
-import { receiveQuestionsSuccess, receiveQuestionsFailure, addQuestionSuccess, addQuestionFailure } from './actions'
+
+import {
+  receiveQuestionsSuccess,
+  receiveQuestionsFailure,
+  addQuestionSuccess,
+  addQuestionFailure
+} from './actions'
 
 import levelsSaga from '../Level/sagas'
 import newLevelFormSaga from '../NewLevelForm/sagas'

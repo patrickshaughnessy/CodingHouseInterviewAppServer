@@ -1,12 +1,10 @@
-.list {
-  font-family: Georgia, Times, 'Times New Roman', serif;
-  padding-left: 1.75em;
+.categorySection {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.listItem {
-  margin: 1em 0;
-}
-
-.listItemTitle {
+.categorySection p {
   font-weight: bold;
 }

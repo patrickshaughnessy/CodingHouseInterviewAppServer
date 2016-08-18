@@ -5,7 +5,10 @@ import {
   CHANGE_VIEWING,
   ADD_QUESTION,
   ADD_QUESTION_SUCCESS,
-  ADD_QUESTION_FAILURE
+  ADD_QUESTION_FAILURE,
+  ADD_CATEGORY,
+  ADD_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAILURE
 } from './constants'
 
 import {
@@ -81,6 +84,16 @@ function questionsReducer (state = initialState, action) {
     case CHANGE_VIEWING:
       return state
         .set('viewing', action.categoryID)
+    case ADD_CATEGORY:
+      return state
+        .set('fetching', true)
+    case ADD_CATEGORY_SUCCESS:
+      return state
+        .set('fetching', false)
+    case ADD_CATEGORY_FAILURE:
+      return state
+        .set('fetching', false)
+        .set('error', action.error)
     case ADD_QUESTION:
       return state
         .set('fetching', true)

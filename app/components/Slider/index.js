@@ -16,7 +16,6 @@ function Slider (props) {
         <div className={styles.level}>
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Confirm</button>
-          <button>Delete</button>
         </div>
         <div className={styles.details}>
           <div className={styles.section}>
@@ -26,6 +25,7 @@ function Slider (props) {
           <div className={styles.section}>
             <p>Question: </p>
             <input
+              type='text'
               className={styles.innerSection}
               value={question}
               onChange={(e) => editQuestion(e.target.value)}

@@ -26,18 +26,21 @@ import {
 import {
   requestQuestions,
   changeViewing,
-  addQuestion
+  addQuestion,
+  addCategory
 } from './actions'
 
-// import styles from './styles.css'
+import styles from './styles.css'
 
 export class QuestionsPage extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      adding: false,
-      question: ''
+      addingQuestion: false,
+      question: '',
+      type: 'INPUT_BOX',
+      category: ''
     }
   }
 
@@ -62,41 +65,100 @@ export class QuestionsPage extends React.Component {
   };
 
   _addQuestion = () => {
-    const { adding, question } = this.state
-    if (adding) {
+    const { addingQuestion, question, type } = this.state
+    if (addingQuestion) {
       const { addQuestion, viewing } = this.props
       const payload = {
         category: viewing,
         levels: [
           {
-            type: 'INPUT_BOX',
-            question,
-            placeholder: ''
+            type,
+            question
           }
         ]
       }
       addQuestion(payload)
     }
-    this.setState({ adding: !adding })
+    this.setState({
+      addingQuestion: !addingQuestion,
+      question: '',
+      type: 'INPUT_BOX'
+    })
+  }
+
+  _addCategory = () => {
+    const { addingCategory, category } = this.state
+    if (addingCategory) {
+      const { addCategory } = this.props
+      addCategory({ name: category })
+    }
+    this.setState({ addingCategory: !addingCategory })
+  }
+
+  _transformCategoryName = (id) => {
+    const { categoriesById } = this.props
+    if (categoriesById && categoriesById[id]) {
+      const category = categoriesById[id]
+      return category.name.slice(0, 1).toUpperCase() + category.name.slice(1)
+    } else {
+      return null
+    }
   }
 
   _renderCategories = () => {
-    const { categories, changeViewing } = this.props
-    return categories && categories.map(category => {
-      return <a key={category._id} onClick={() => changeViewing(category._id)}>{category.name}</a>
+    const { categories, changeViewing, viewing } = this.props
+    return categories && categories.map((category, i) => {
+      if (category._id === viewing) {
+        return (
+          <span key={category._id}>
+            {category.name}
+            {i !== categories.length - 1 ? <span> /</span> : null}
+          </span>
+        )
+      } else {
+        return (
+          <span key={category._id}>
+            <a onClick={() => changeViewing(category._id)}>
+              {category.name}
+              {i !== categories.length - 1 ? <span> /</span> : null}
+            </a>
+          </span>
+        )
+      }
     })
   }
 
   _renderQuestions = () => {
     const { questionsById, questionsByCategory, viewing } = this.props
-    if (!questionsById || !questionsByCategory || !viewing) return
+    if (!questionsById || !viewing || !questionsByCategory || !questionsByCategory[viewing]) return
     return questionsByCategory[viewing].map(id => {
       return <Question key={id} {...questionsById.toJS()[id]} />
     })
   }
 
+  _renderNewQuestionForm = () => {
+    const { question, type } = this.state
+    return (
+      <div>
+        <input
+          type='text'
+          value={question}
+          onChange={(e) => this.setState({ question: e.target.value })}
+        />
+        <select value={type} onChange={(e) => this.setState({ type: e.target.value })}>
+          <option value='INPUT_BOX'>INPUT_BOX</option>
+          <option value='CHECKBOX'>CHECKBOX</option>
+          <option value='RADIO'>RADIO</option>
+          <option value='SLIDER'>SLIDER</option>
+        </select>
+      </div>
+    )
+  }
+
   render () {
-    const { adding, question } = this.state
+    const { addingQuestion } = this.state
+    const { viewing } = this.props
+    let currentCategory = this._transformCategoryName(viewing)
     return (
       <div>
         <Helmet
@@ -105,13 +167,15 @@ export class QuestionsPage extends React.Component {
             { name: 'description', content: 'A list of available questions for interviews' }
           ]}
         />
+        <div className={styles.categorySection}>
+          {this._renderCategories()}
+        </div>
         <H1>
-          Questions
+          {currentCategory} Questions
         </H1>
-        {this._renderCategories()}
-        <button onClick={this._addQuestion}>{adding ? 'Submit' : 'Add Question'}</button>
-        {adding ? <input type='text' value={question} onChange={(e) => this.setState({ question: e.target.value })} /> : null}
         {this._renderQuestions()}
+        <button onClick={this._addQuestion}>{addingQuestion ? 'Submit' : 'Add Question'}</button>
+        {addingQuestion ? this._renderNewQuestionForm() : null}
 
       </div>
     )
@@ -137,7 +201,8 @@ function mapDispatchToProps (dispatch) {
     onMount: () => dispatch(requestQuestions()),
     changeViewing: (categoryID) => dispatch(changeViewing(categoryID)),
     changeRoute: (url) => dispatch(push(url)),
-    addQuestion: (category) => dispatch(addQuestion(category)),
+    addQuestion: (payload) => dispatch(addQuestion(payload)),
+    addCategory: (category) => dispatch(addCategory(category)),
     dispatch
   }
 }
