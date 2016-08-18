@@ -2,7 +2,10 @@ import {
   REQUEST_QUESTIONS,
   RECEIVE_QUESTIONS_SUCCESS,
   RECEIVE_QUESTIONS_FAILURE,
-  CHANGE_VIEWING
+  CHANGE_VIEWING,
+  ADD_QUESTION,
+  ADD_QUESTION_SUCCESS,
+  ADD_QUESTION_FAILURE
 } from './constants'
 
 import {
@@ -20,14 +23,20 @@ import {
   ADD_LEVEL_FAILURE
 } from '../NewLevelForm/constants'
 
+import {
+  DELETE_QUESTION,
+  DELETE_QUESTION_SUCCESS,
+  DELETE_QUESTION_FAILURE
+} from '../Question/constants'
+
 import { fromJS } from 'immutable'
 
 const initialState = fromJS({
-  questions: null,
-  categories: null,
-  categoriesById: null,
-  questionsById: null,
-  questionsByCategory: null,
+  questions: [],
+  categories: [],
+  categoriesById: {},
+  questionsById: {},
+  questionsByCategory: {},
   viewing: null,
   fetching: null,
   error: null
@@ -63,7 +72,7 @@ function questionsReducer (state = initialState, action) {
         .setIn(['questionsById'], fromJS(mapItemsToIds(questions)))
         .set('categories', categories)
         .set('categoriesById', mapItemsToIds(categories))
-        .set('questionsByCategory', mapQuestionsToCategories(questions))
+        .set('questionsByCategory', fromJS(mapQuestionsToCategories(questions)))
         .set('viewing', categories && categories[0]._id)
     case RECEIVE_QUESTIONS_FAILURE:
       return state
@@ -72,6 +81,30 @@ function questionsReducer (state = initialState, action) {
     case CHANGE_VIEWING:
       return state
         .set('viewing', action.categoryID)
+    case ADD_QUESTION:
+      return state
+        .set('fetching', true)
+    case ADD_QUESTION_SUCCESS:
+      return state
+        .set('fetching', false)
+        .mergeIn(['questionsById'], fromJS(mapItemsToIds([action.question])))
+        .updateIn(['questionsByCategory', action.question.category], questions => questions.push(action.question._id))
+    case ADD_QUESTION_FAILURE:
+      return state
+        .set('fetching', false)
+        .set('error', action.error)
+    case DELETE_QUESTION:
+      return state
+        .set('fetching', true)
+    case DELETE_QUESTION_SUCCESS:
+      return state
+        .set('fetching', false)
+        .deleteIn(['questionsById', action.question._id], action.question._id.toString())
+        .updateIn(['questionsByCategory', action.question.category], questions => questions.filter(id => id !== action.question._id))
+    case DELETE_QUESTION_FAILURE:
+      return state
+        .set('fetching', false)
+        .set('error', action.error)
     case ADD_LEVEL:
       return state
         .set('fetching', true)

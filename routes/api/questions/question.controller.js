@@ -35,7 +35,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   Question.findByIdAndRemove(req.params.id, (err, removed) => {
-    return res.status(err ? 400 : 200).json(err || 'deleted!')
+    return res.status(err ? 400 : 200).json(err || removed)
   })
 }
 

@@ -66,7 +66,7 @@ function Checkbox (props) {
         <div className={styles.level}>
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Edit</button>
-          <button onClick={deleteLevel}>Delete</button>
+          {position !== 0 ? <button onClick={deleteLevel}>Delete</button> : null}
         </div>
         <div className={styles.details}>
           <div className={styles.section}>

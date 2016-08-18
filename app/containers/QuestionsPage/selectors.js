@@ -38,7 +38,7 @@ const selectCategoriesById = () => createSelector(
 
 const selectQuestionsByCategory = () => createSelector(
   selectQuestionsState(),
-  (questionsState) => questionsState.get('questionsByCategory')
+  (questionsState) => questionsState.get('questionsByCategory').toJS()
 )
 
 const selectViewing = () => createSelector(

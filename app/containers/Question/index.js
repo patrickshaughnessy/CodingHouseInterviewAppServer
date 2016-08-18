@@ -7,6 +7,10 @@ import NewLevelForm from '../NewLevelForm'
 
 import styles from './styles.css'
 
+import {
+  deleteQuestion
+} from './actions'
+
 class Question extends Component {
 
   constructor (props) {
@@ -33,13 +37,13 @@ class Question extends Component {
   }
 
   render () {
-    const { levels, _id } = this.props
+    const { levels, _id, deleteQuestion } = this.props
     const { adding } = this.state
     return (
       <li className={styles.container}>
         <div className={styles.title}>
           <h3>{levels[0].question} ({levels.length === 1 ? levels.length + ' level' : levels.length + ' levels'})</h3>
-          {/* <button>Delete</button> */}
+          <button onClick={() => deleteQuestion({id: _id})}>Delete</button>
           <button onClick={this._addLevel}>{adding ? 'Finished' : 'Add Level'}</button>
         </div>
         <div className={styles.innerContainer}>
@@ -63,7 +67,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps (dispatch) {
   return {
-
+    deleteQuestion: (id) => dispatch(deleteQuestion(id))
   }
 }
 

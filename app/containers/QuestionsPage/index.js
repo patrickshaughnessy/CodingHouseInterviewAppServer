@@ -25,12 +25,21 @@ import {
 
 import {
   requestQuestions,
-  changeViewing
+  changeViewing,
+  addQuestion
 } from './actions'
 
 // import styles from './styles.css'
 
 export class QuestionsPage extends React.Component {
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      adding: false,
+      question: ''
+    }
+  }
 
   componentDidMount () {
     const { onMount } = this.props
@@ -52,6 +61,25 @@ export class QuestionsPage extends React.Component {
     this.openRoute('/')
   };
 
+  _addQuestion = () => {
+    const { adding, question } = this.state
+    if (adding) {
+      const { addQuestion, viewing } = this.props
+      const payload = {
+        category: viewing,
+        levels: [
+          {
+            type: 'INPUT_BOX',
+            question,
+            placeholder: ''
+          }
+        ]
+      }
+      addQuestion(payload)
+    }
+    this.setState({ adding: !adding })
+  }
+
   _renderCategories = () => {
     const { categories, changeViewing } = this.props
     return categories && categories.map(category => {
@@ -68,6 +96,7 @@ export class QuestionsPage extends React.Component {
   }
 
   render () {
+    const { adding, question } = this.state
     return (
       <div>
         <Helmet
@@ -79,9 +108,11 @@ export class QuestionsPage extends React.Component {
         <H1>
           Questions
         </H1>
-
         {this._renderCategories()}
+        <button onClick={this._addQuestion}>{adding ? 'Submit' : 'Add Question'}</button>
+        {adding ? <input type='text' value={question} onChange={(e) => this.setState({ question: e.target.value })} /> : null}
         {this._renderQuestions()}
+
       </div>
     )
   }
@@ -106,7 +137,7 @@ function mapDispatchToProps (dispatch) {
     onMount: () => dispatch(requestQuestions()),
     changeViewing: (categoryID) => dispatch(changeViewing(categoryID)),
     changeRoute: (url) => dispatch(push(url)),
-
+    addQuestion: (category) => dispatch(addQuestion(category)),
     dispatch
   }
 }

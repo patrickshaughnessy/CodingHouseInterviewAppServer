@@ -1,11 +1,12 @@
 
 import { take, call, put, fork } from 'redux-saga/effects'
 
-import { REQUEST_QUESTIONS } from './constants'
-import { receiveQuestionsSuccess, receiveQuestionsFailure } from './actions'
+import { REQUEST_QUESTIONS, ADD_QUESTION } from './constants'
+import { receiveQuestionsSuccess, receiveQuestionsFailure, addQuestionSuccess, addQuestionFailure } from './actions'
 
 import levelsSaga from '../Level/sagas'
 import newLevelFormSaga from '../NewLevelForm/sagas'
+import { watchDeleteQuestion } from '../Question/sagas'
 
 import request from 'utils/request'
 // import { selectUser } from '../Login/selectors'
@@ -39,8 +40,36 @@ export function * watchQuestions () {
   }
 }
 
+export function * workerAddQuestion (payload) {
+  const requestURL = '/api/questions'
+  let requestOptions = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  }
+  const resp = yield call(request, requestURL, requestOptions)
+  if (!resp.err) {
+    yield put(addQuestionSuccess(resp.data))
+  } else {
+    const { message } = resp.err
+    yield put(addQuestionFailure({ message }))
+  }
+}
+
+export function * watchAddQuestion () {
+  while (true) {
+    const { payload } = yield take(ADD_QUESTION)
+    yield call(() => workerAddQuestion(payload))
+  }
+}
+
 export function * questionsSaga () {
   yield fork(watchQuestions)
+  yield fork(watchAddQuestion)
+  yield fork(watchDeleteQuestion)
 }
 
 // Bootstrap sagas
