@@ -8,8 +8,17 @@ import {
 import {
   UPDATE_LEVEL,
   UPDATE_LEVEL_SUCCESS,
-  UPDATE_LEVEL_FAILURE
+  UPDATE_LEVEL_FAILURE,
+  DELETE_LEVEL,
+  DELETE_LEVEL_SUCCESS,
+  DELETE_LEVEL_FAILURE
 } from '../Level/constants'
+
+import {
+  ADD_LEVEL,
+  ADD_LEVEL_SUCCESS,
+  ADD_LEVEL_FAILURE
+} from '../NewLevelForm/constants'
 
 import { fromJS } from 'immutable'
 
@@ -65,13 +74,34 @@ function questionsReducer (state = initialState, action) {
         .set('viewing', action.categoryID)
     case UPDATE_LEVEL:
       return state
-        .set('fetching', false)
+        .set('fetching', true)
     case UPDATE_LEVEL_SUCCESS:
-      const { _id } = action.question
       return state
         .set('fetching', false)
-        .setIn(['questionsById', _id], action.question)
+        .setIn(['questionsById', action.question._id], action.question)
     case UPDATE_LEVEL_FAILURE:
+      return state
+        .set('fetching', false)
+        .set('error', action.error)
+    case ADD_LEVEL:
+      return state
+        .set('fetching', true)
+    case ADD_LEVEL_SUCCESS:
+      return state
+        .set('fetching', false)
+        .setIn(['questionsById', action.question._id], action.question)
+    case ADD_LEVEL_FAILURE:
+      return state
+        .set('fetching', false)
+        .set('error', action.error)
+    case DELETE_LEVEL:
+      return state
+        .set('fetching', true)
+    case DELETE_LEVEL_SUCCESS:
+      return state
+        .set('fetching', false)
+        .setIn(['questionsById', action.question._id], action.question)
+    case DELETE_LEVEL_FAILURE:
       return state
         .set('fetching', false)
         .set('error', action.error)

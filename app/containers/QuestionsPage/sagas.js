@@ -4,8 +4,8 @@ import { take, call, put, fork } from 'redux-saga/effects'
 import { REQUEST_QUESTIONS } from './constants'
 import { receiveQuestionsSuccess, receiveQuestionsFailure } from './actions'
 
-// import { UPDATE_LEVEL } from '../Level/constants'
 import levelsSaga from '../Level/sagas'
+import newLevelFormSaga from '../NewLevelForm/sagas'
 
 import request from 'utils/request'
 // import { selectUser } from '../Login/selectors'
@@ -46,5 +46,6 @@ export function * questionsSaga () {
 // Bootstrap sagas
 export default [
   questionsSaga,
-  ...levelsSaga
+  ...levelsSaga,
+  ...newLevelFormSaga
 ]

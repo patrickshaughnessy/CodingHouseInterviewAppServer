@@ -15,7 +15,7 @@
   margin-bottom: 4px;
   padding-left: 1em;
   padding-right: 1em;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .innerContainer {
@@ -47,4 +47,13 @@ button {
 button:active {
   background: #41ADDD;
   color: #FFF;
+}
+
+.title h3 {
+  flex: 9;
+}
+
+.title button {
+  flex: 1;
+  margin: 1em;
 }

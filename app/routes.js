@@ -86,7 +86,7 @@ export default function createRoutes (store) {
 
         importModules.then(([questionsReducer, levelReducer, sagas, component]) => {
           injectReducer('questions', questionsReducer.default)
-          // injectReducer('questions', levelReducer.default)
+          // injectReducer('levels', levelReducer.default)
           injectSagas(sagas.default)
 
           renderRoute(component)

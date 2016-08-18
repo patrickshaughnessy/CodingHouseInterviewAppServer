@@ -16,6 +16,7 @@ function Slider (props) {
         <div className={styles.level}>
           <p>Level {position + 1}</p>
           <button onClick={toggleEditing}>Confirm</button>
+          <button>Delete</button>
         </div>
         <div className={styles.details}>
           <div className={styles.section}>

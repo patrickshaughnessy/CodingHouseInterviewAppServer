@@ -8,7 +8,8 @@ import Slider from 'components/Slider'
 import Checkbox from 'components/Checkbox'
 
 import {
-  updateLevel
+  updateLevel,
+  deleteLevel
 } from './actions'
 
 import styles from './styles.css'
@@ -21,6 +22,11 @@ class Level extends Component {
     this.state = {
       editing: false
     }
+  }
+
+  _deleteLevel = () => {
+    const { deleteLevel, _id } = this.props
+    deleteLevel({ levelID: _id })
   }
 
   _toggleEditing = () => {
@@ -105,7 +111,8 @@ class Level extends Component {
           placeholder,
           toggleEditing: this._toggleEditing,
           editQuestion: this._editQuestion,
-          editPlaceholder: this._editPlaceholder
+          editPlaceholder: this._editPlaceholder,
+          deleteLevel: this._deleteLevel
         }
         return <InputBox key={_id} {...inputProps} />
       case 'RADIO':
@@ -175,7 +182,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps (dispatch) {
   return {
-    updateLevel: (payload) => dispatch(updateLevel(payload))
+    updateLevel: (payload) => dispatch(updateLevel(payload)),
+    deleteLevel: (id) => dispatch(deleteLevel(id))
   }
 }
 

@@ -33,26 +33,60 @@ exports.update = (req, res) => {
   })
 }
 
-exports.editLevel = (req, res) => {
-  Question.findOneAndUpdate(
-    { '_id': req.body.questionID, 'levels._id': req.body.levelID },
-    {
-      '$set': {
-        'levels.$': req.body.level
-      }
-    },
-    { new: true },
-    (err, question) => {
-      if (err) return handleError(res, err)
-      return res.status(200).json(question)
-    }
-  )
-}
-
 exports.delete = (req, res) => {
   Question.findByIdAndRemove(req.params.id, (err, removed) => {
     return res.status(err ? 400 : 200).json(err || 'deleted!')
   })
+}
+
+exports.levels = {
+  add: (req, res) => {
+    Question.findByIdAndUpdate(
+      req.body.questionID,
+      {
+        '$push': {
+          'levels': req.body.level
+        }
+      },
+      { new: true },
+      (err, question) => {
+        if (err) return handleError(res, err)
+        return res.status(200).json(question)
+      }
+    )
+  },
+  edit: (req, res) => {
+    Question.findOneAndUpdate(
+      { '_id': req.body.questionID, 'levels._id': req.body.levelID },
+      {
+        '$set': {
+          'levels.$': req.body.level
+        }
+      },
+      { new: true },
+      (err, question) => {
+        if (err) return handleError(res, err)
+        return res.status(200).json(question)
+      }
+    )
+  },
+  remove: (req, res) => {
+    Question.findOneAndUpdate(
+      { 'levels._id': req.params.levelID },
+      {
+        '$pull': {
+          'levels': {
+            '_id': req.params.levelID
+          }
+        }
+      },
+      { new: true },
+      (err, question) => {
+        if (err) return handleError(res, err)
+        return res.status(200).json(question)
+      }
+    )
+  }
 }
 
 function handleError (res, err, response) {
