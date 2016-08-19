@@ -47,7 +47,7 @@ export class HomePage extends React.Component {
         />
         <div>
           <section className={`${styles.textSection} ${styles.centered}`}>
-            <h2>HOME PAGE</h2>
+            <h2>HOME PAGSSSE</h2>
           </section>
         </div>
       </article>
