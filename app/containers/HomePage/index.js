@@ -47,8 +47,8 @@ export class HomePage extends React.Component {
           ]}
         />
         <div>
-          <section className={`${styles.textSection} ${styles.centered}`}>
-            <h2>HOME PAGSSSE</h2>
+          <section className='pure-g'>
+            <h2 className='pure-u-1-5'>HOME PAGSSSE</h2>
             <button onClick={() => changeRoute('/login')}>Login</button>
           </section>
         </div>
