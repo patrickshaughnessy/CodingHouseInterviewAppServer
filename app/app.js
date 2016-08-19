@@ -17,6 +17,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import FontFaceObserver from 'fontfaceobserver'
 import useScroll from 'react-router-scroll'
 import configureStore from './Store'
+import Actions from './Actions/Creators'
 
 // // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // // the index.html file and this observer)
@@ -46,6 +47,8 @@ const routes = {
   component: App,
   childRoutes: createRoutes(store)
 }
+
+// store.dispatch(Actions.startup())
 
 const render = () => {
   ReactDOM.render(

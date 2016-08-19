@@ -34,7 +34,7 @@ export default function configureStore (initialState = {}, history) {
     enhancers
   )
 
-  // sagaMiddleware.run(sagas)
+  sagaMiddleware.run(sagas)
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */

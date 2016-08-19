@@ -1,29 +1,54 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import styles from './Styles/NavBarStyle.css'
 
-const NavBar = (props) => {
-  const { changeRoute } = props
-  return (
-    <div className={styles.menu}>
-      <div className='pure-menu'>
-        <a className='pure-menu-heading' href='#'>Coding House</a>
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import AppBar from 'material-ui/AppBar'
 
-        <ul className='pure-menu-list'>
-          <li className='pure-menu-item'><a href='#' className='pure-menu-link'>Home</a></li>
-          <li className='pure-menu-item'><a href='#' className='pure-menu-link'>Questions</a></li>
+class NavBar extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      open: false
+    }
+  }
 
-          <li className='pure-menu-item menu-item-divided pure-menu-selected'>
-            <a href='#' className='pure-menu-link'>Settings</a>
-          </li>
+  _toggleDrawer = () => {
+    const { open } = this.state
+    this.setState({ open: !open })
+  }
 
-          <li className='pure-menu-item'><a href='#' className='pure-menu-link'>Interviews</a></li>
-        </ul>
+  _handleLocationChange = (location) => {
+    const { changeRoute } = this.props
+    changeRoute(location)
+    this._toggleDrawer()
+  }
+
+  render () {
+    const { open } = this.state
+    return (
+      <div>
+        <AppBar
+          title='Coding House Interview App'
+          iconClassNameRight='muidocs-icon-navigation-expand-more'
+          onLeftIconButtonTouchTap={this._toggleDrawer}
+        />
+        <Drawer
+          open={open}
+          docked={false}
+          onRequestChange={open => this.setState({open})}
+        >
+          <MenuItem onTouchTap={() => this._handleLocationChange('/')}>Home</MenuItem>
+          <MenuItem onTouchTap={() => this._handleLocationChange('/login')}>Login</MenuItem>
+          <MenuItem onTouchTap={() => this._handleLocationChange('/settings')}>Settings</MenuItem>
+          <MenuItem onTouchTap={() => this._handleLocationChange('/questions')}>Questions</MenuItem>
+        </Drawer>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 NavBar.propTypes = {

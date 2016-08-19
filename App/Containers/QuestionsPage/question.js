@@ -1,8 +1,4 @@
-/*
- *
- * List all the features
- */
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Helmet from 'react-helmet'
@@ -32,7 +28,7 @@ import {
 
 import styles from './styles.css'
 
-export class QuestionsPage extends React.Component {
+export class QuestionsPage extends Component {
 
   constructor (props) {
     super(props)
@@ -48,21 +44,6 @@ export class QuestionsPage extends React.Component {
     const { onMount } = this.props
     onMount()
   }
-  /**
-   * Changes the route
-   *
-   * @param  {string} route The route we want to go to
-   */
-  openRoute = (route) => {
-    this.props.changeRoute(route)
-  };
-
-  /**
-   * Changed route to '/'
-   */
-  openHomePage = () => {
-    this.openRoute('/')
-  };
 
   _addQuestion = () => {
     const { addingQuestion, question, type } = this.state
@@ -156,9 +137,9 @@ export class QuestionsPage extends React.Component {
   }
 
   render () {
-    const { addingQuestion } = this.state
-    const { viewing } = this.props
-    let currentCategory = this._transformCategoryName(viewing)
+    // const { addingQuestion } = this.state
+    // const { viewing } = this.props
+    // let currentCategory = this._transformCategoryName(viewing)
     return (
       <div>
         <Helmet
@@ -167,15 +148,16 @@ export class QuestionsPage extends React.Component {
             { name: 'description', content: 'A list of available questions for interviews' }
           ]}
         />
-        <div className={styles.categorySection}>
+        <h1>Questions</h1>
+        {/* <div className={styles.categorySection}>
           {this._renderCategories()}
-        </div>
-        <H1>
+          </div>
+          <H1>
           {currentCategory} Questions
-        </H1>
-        {this._renderQuestions()}
-        <button onClick={this._addQuestion}>{addingQuestion ? 'Submit' : 'Add Question'}</button>
-        {addingQuestion ? this._renderNewQuestionForm() : null}
+          </H1>
+          {this._renderQuestions()}
+          <button onClick={this._addQuestion}>{addingQuestion ? 'Submit' : 'Add Question'}</button>
+        {addingQuestion ? this._renderNewQuestionForm() : null} */}
 
       </div>
     )
@@ -186,24 +168,24 @@ QuestionsPage.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  questions: selectQuestions(),
-  questionsById: selectQuestionsById(),
-  categories: selectCategories(),
-  categoriesById: selectCategoriesById(),
-  questionsByCategory: selectQuestionsByCategory(),
-  viewing: selectViewing(),
-  fetching: selectFetching(),
-  error: selectError()
+  // questions: selectQuestions(),
+  // questionsById: selectQuestionsById(),
+  // categories: selectCategories(),
+  // categoriesById: selectCategoriesById(),
+  // questionsByCategory: selectQuestionsByCategory(),
+  // viewing: selectViewing(),
+  // fetching: selectFetching(),
+  // error: selectError()
 })
 
 function mapDispatchToProps (dispatch) {
   return {
-    onMount: () => dispatch(requestQuestions()),
-    changeViewing: (categoryID) => dispatch(changeViewing(categoryID)),
-    changeRoute: (url) => dispatch(push(url)),
-    addQuestion: (payload) => dispatch(addQuestion(payload)),
-    addCategory: (category) => dispatch(addCategory(category)),
-    dispatch
+    // onMount: () => dispatch(requestQuestions()),
+    // changeViewing: (categoryID) => dispatch(changeViewing(categoryID)),
+    // changeRoute: (url) => dispatch(push(url)),
+    // addQuestion: (payload) => dispatch(addQuestion(payload)),
+    // addCategory: (category) => dispatch(addCategory(category)),
+    // dispatch
   }
 }
 
