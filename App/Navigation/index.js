@@ -1,17 +1,57 @@
-const selectLocationState = () => {
-  let prevRoutingState
-  let prevRoutingStateJS
-
-  return (state) => {
-    const routingState = state.route
-
-    if (routingState !== prevRoutingState) {
-      prevRoutingState = routingState
-      prevRoutingStateJS = routingState.toJS()
-    }
-
-    return prevRoutingStateJS
-  }
+const errorLoading = (err) => {
+  console.error('Dynamic page loading failed', err) // eslint-disable-line no-console
 }
 
-export default selectLocationState
+const loadModule = (cb) => (componentModule) => {
+  cb(null, componentModule.default)
+}
+
+export default function createRoutes (store) {
+  return [
+    {
+      path: '/',
+      name: 'home',
+      getComponent (nextState, cb) {
+        System.import('Containers/HomePage')
+          .then(loadModule(cb))
+          .catch(errorLoading)
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      getComponent (nextState, cb) {
+        System.import('Containers/LoginPage')
+          .then(loadModule(cb))
+          .catch(errorLoading)
+      }
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      getComponent (nextState, cb) {
+        System.import('Containers/SettingsPage')
+          .then(loadModule(cb))
+          .catch(errorLoading)
+      }
+    },
+    {
+      path: '/questions',
+      name: 'questions',
+      getComponent (nextState, cb) {
+        System.import('Containers/QuestionsPage')
+          .then(loadModule(cb))
+          .catch(errorLoading)
+      }
+    },
+    {
+      path: '*',
+      name: 'notfound',
+      getComponent (nextState, cb) {
+        System.import('containers/NotFoundPage')
+          .then(loadModule(cb))
+          .catch(errorLoading)
+      }
+    }
+  ]
+}

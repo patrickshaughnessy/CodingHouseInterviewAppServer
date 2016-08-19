@@ -16,7 +16,8 @@ const loggerMiddleware = createLogger({
 
 export default function configureStore (initialState = {}, history) {
   const middlewares = [
-    sagaMiddleware
+    sagaMiddleware,
+    routerMiddleware(history)
   ]
 
   if (process.env.NODE_ENV === 'development') {

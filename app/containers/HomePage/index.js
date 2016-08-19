@@ -37,6 +37,7 @@ export class HomePage extends React.Component {
   };
 
   render () {
+    const { changeRoute } = this.props
     return (
       <article>
         <Helmet
@@ -48,6 +49,7 @@ export class HomePage extends React.Component {
         <div>
           <section className={`${styles.textSection} ${styles.centered}`}>
             <h2>HOME PAGSSSE</h2>
+            <button onClick={() => changeRoute('/login')}>Login</button>
           </section>
         </div>
       </article>

@@ -30,33 +30,19 @@ openSansObserver.load().then(() => {
   document.body.classList.remove(styles.fontLoaded)
 })
 
-// Create redux store with history
-// this uses the singleton browserHistory provided by react-router
-// Optionally, this could be changed to leverage a created history
-// e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {}
 const store = configureStore(initialState, browserHistory)
 
-// If you use Redux devTools extension, since v2.0.1, they added an
-// `updateStore`, so any enhancers that change the store object
-// could be used with the devTools' store.
-// As this boilerplate uses Redux & Redux-Saga, the `updateStore` is needed
-// if you want to `take` actions in your Sagas, dispatched from devTools.
 if (window.devToolsExtension) {
   window.devToolsExtension.updateStore(store)
 }
 
-// Sync history and store, as the react-router-redux reducer
-// is under the non-default key ("routing"), selectLocationState
-// must be provided for resolving how to retrieve the "route" in the state
-// import { selectLocationState } from 'containers/App/selectors'
-// import selectLocationState from './Navigation'
 const history = syncHistoryWithStore(browserHistory, store)
 
 // Set up the router, wrapping all Routes in the App component
 import App from 'Containers/App'
-import createRoutes from './Navigation/Routes'
-const rootRoute = {
+import createRoutes from './Navigation'
+const routes = {
   component: App,
   childRoutes: createRoutes(store)
 }
@@ -66,7 +52,7 @@ const render = () => {
     <Provider store={store}>
       <Router
         history={history}
-        routes={rootRoute}
+        routes={routes}
         render={
           // Scroll to top when going to a new page, imitating default browser
           // behaviour
