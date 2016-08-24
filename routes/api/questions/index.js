@@ -5,6 +5,7 @@ const router = express.Router()
 
 const controller = require('./question.controller')
 
+router.get('/category/:id', controller.show)
 router.get('/', controller.index)
 
 router.post('/levels', controller.levels.add)

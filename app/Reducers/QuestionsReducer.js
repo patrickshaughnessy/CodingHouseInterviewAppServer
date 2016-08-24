@@ -4,7 +4,8 @@ import { createReducer } from 'reduxsauce'
 
 export const INITIAL_STATE = Immutable({
   all: [],
-  questionsById: {}
+  questionsById: {},
+  viewing: null
 })
 
 const mapQuestionsToIds = (questions) => {

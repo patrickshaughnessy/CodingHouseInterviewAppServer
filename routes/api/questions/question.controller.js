@@ -21,6 +21,16 @@ exports.index = (req, res) => {
     })
 }
 
+exports.show = (req, res) => {
+  Question
+    .find({ category: req.params.id })
+    .lean()
+    .exec((err, questions) => {
+      if (err) return handleError(res, err)
+      return res.status(200).json({ questions })
+    })
+}
+
 exports.create = (req, res) => {
   Question.create(req.body, (err, question) => {
     return res.status(err ? 400 : 200).json(err || question)

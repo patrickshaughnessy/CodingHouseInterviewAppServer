@@ -16,6 +16,8 @@ const requestCategories = () => ({ type: Types.REQUEST_CATEGORIES })
 const receiveCategories = (categories) => ({ type: Types.RECEIVE_CATEGORIES, ...categories })
 const receiveCategoriesFailure = (payload) => ({ type: Types.RECEIVE_CATEGORIES_FAILURE, ...payload })
 
+const changeViewing = (categoryID) => ({ type: Types.CHANGE_VIEWING, categoryID })
+
 /**
  Makes available all the action creators we've created.
  */
@@ -31,4 +33,5 @@ export default {
   requestCategories,
   receiveCategories,
   receiveCategoriesFailure,
+  changeViewing
 }
