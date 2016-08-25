@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { List, ListItem } from 'material-ui/List'
+import { List } from 'material-ui/List'
 
 import Question from './Question'
 // import NewQuestionForm from './NewQuestionForm'

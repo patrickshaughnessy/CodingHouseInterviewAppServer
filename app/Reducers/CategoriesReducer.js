@@ -34,7 +34,7 @@ const receiveQuestions = (state, action) => {
 // }
 
 const ACTION_HANDLERS = {
-  [Types.RECEIVE_QUESTIONS]: receiveQuestions,
+  [Types.RECEIVE_QUESTIONS]: receiveQuestions
   // [Types.EDIT_LEVEL_SUCCESS]: editLevelSuccess,
   // [Types.CHANGE_VIEWING]: changeViewing
 }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { List, ListItem } from 'material-ui/List'
-import RaisedButton from 'material-ui/RaisedButton'
+import { ListItem } from 'material-ui/List'
 
 import Level from '../Components/Level'
 import AddLevel from '../Components/AddLevel'
@@ -14,7 +13,8 @@ export class Question extends Component {
     const nestedLevels = levels.map(level => <Level key={level} {...levelsById[level]} />)
     const addLevelButton = <AddLevel key={_id + 'ADD'} questionID={_id} />
     const deleteQuestionButton = <DeleteQuestion key={_id + 'DELETE'} questionID={_id} />
-      return (
+
+    return (
       <ListItem
         primaryText={levelsById[levels[0]].question}
         primaryTogglesNestedList

@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 
-import styles from './Styles/LevelStyle.css'
+// import styles from './Styles/LevelStyle.css'
 
-import { List, ListItem } from 'material-ui/List'
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
-import RaisedButton from 'material-ui/RaisedButton'
-import Dialog from 'material-ui/Dialog'
+import { ListItem } from 'material-ui/List'
+import { Table, TableBody, TableHeader, TableRow, TableRowColumn } from 'material-ui/Table'
 
 import EditLevel from './EditLevel'
 import DeleteLevel from './DeleteLevel'

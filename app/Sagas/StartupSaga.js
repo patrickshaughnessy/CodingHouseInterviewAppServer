@@ -1,7 +1,7 @@
-import { take, select, put } from 'redux-saga/effects'
-import { push, LOCATION_CHANGE } from 'react-router-redux'
+import { take } from 'redux-saga/effects'
+// import { push, LOCATION_CHANGE } from 'react-router-redux'
 import Types from '../Actions/Types'
-import R from 'ramda'
+// import R from 'ramda'
 
 export function * watchStartup () {
   yield take(Types.STARTUP)

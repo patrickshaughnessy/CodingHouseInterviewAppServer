@@ -4,12 +4,9 @@ import { connect } from 'react-redux'
 import Actions from '../Actions/Creators'
 // import styles from './Styles/LevelStyle.css'
 
-import { Table, TableBody, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import { TableHeaderColumn } from 'material-ui/Table'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
-import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 
 export class DeleteLevel extends Component {

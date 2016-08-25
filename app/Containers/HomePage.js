@@ -4,8 +4,6 @@ import Helmet from 'react-helmet'
 
 import CircularProgress from 'material-ui/CircularProgress'
 
-import Actions from '../Actions/Creators'
-
 import styles from './Styles/HomePageStyle.css'
 
 class HomePage extends Component {

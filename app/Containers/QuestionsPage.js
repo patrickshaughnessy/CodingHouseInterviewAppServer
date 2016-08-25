@@ -5,10 +5,6 @@ import Helmet from 'react-helmet'
 
 import Actions from '../Actions/Creators'
 
-import DropDownMenu from 'material-ui/DropDownMenu'
-import MenuItem from 'material-ui/MenuItem'
-import Paper from 'material-ui/Paper'
-
 import CategorySelection from './CategorySelection'
 import QuestionsList from './QuestionsList'
 import AddQuestion from './AddQuestion'
@@ -27,8 +23,7 @@ export class QuestionsPage extends Component {
   }
 
   componentDidMount () {
-    const { requestQuestions, requestCategories } = this.props
-    // requestCategories()
+    const { requestQuestions } = this.props
     requestQuestions()
   }
 

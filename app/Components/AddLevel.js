@@ -209,7 +209,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addLevel: (level) => dispatch(Actions.addLevel(level)),
+    addLevel: (level) => dispatch(Actions.addLevel(level))
   }
 }
 

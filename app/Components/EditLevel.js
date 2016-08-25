@@ -180,7 +180,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editLevel: (level) => dispatch(Actions.editLevel(level)),
+    editLevel: (level) => dispatch(Actions.editLevel(level))
   }
 }
 

@@ -59,7 +59,7 @@ const chTheme = {
     clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack
   }
-};
+}
 
 function App (props) {
   return (
