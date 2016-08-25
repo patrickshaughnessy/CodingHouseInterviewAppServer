@@ -25,6 +25,13 @@ export default (api) => {
   function * watcher () {
     yield spawn(function * () {
       while (true) {
+        const { level } = yield take(Types.ADD_LEVEL)
+        yield call(worker, 'addLevel', level)
+      }
+    })
+
+    yield spawn(function * () {
+      while (true) {
         const { level } = yield take(Types.EDIT_LEVEL)
         yield call(worker, 'editLevel', level)
       }

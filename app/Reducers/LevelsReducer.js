@@ -13,6 +13,18 @@ const receiveQuestions = (state, action) => {
   })
 }
 
+const addLevelSuccess = (state, action) => {
+  const { entities } = action.payload
+  return state.updateIn(['byId'], (l) => {
+    const { levels } = entities
+    const lvls = l.asMutable()
+    for (let id in levels) {
+      lvls[id] = levels[id]
+    }
+    return Immutable(lvls)
+  })
+}
+
 const editLevelSuccess = (state, action) => {
   const { entities } = action.payload
   return state.updateIn(['byId'], (l) => {
@@ -27,6 +39,7 @@ const editLevelSuccess = (state, action) => {
 
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions,
+  [Types.ADD_LEVEL_SUCCESS]: addLevelSuccess,
   [Types.EDIT_LEVEL_SUCCESS]: editLevelSuccess
 }
 

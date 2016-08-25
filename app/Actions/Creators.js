@@ -18,6 +18,10 @@ const receiveCategoriesFailure = (payload) => ({ type: Types.RECEIVE_CATEGORIES_
 
 const changeViewing = (categoryID) => ({ type: Types.CHANGE_VIEWING, categoryID })
 
+const addLevel = (level) => ({ type: Types.ADD_LEVEL, level })
+const addLevelSuccess = (payload) => ({ type: Types.ADD_LEVEL_SUCCESS, ...payload })
+const addLevelFailure = (payload) => ({ type: Types.ADD_LEVEL_FAILURE, ...payload })
+
 const editLevel = (level) => ({ type: Types.EDIT_LEVEL, level })
 const editLevelSuccess = (payload) => ({ type: Types.EDIT_LEVEL_SUCCESS, ...payload })
 const editLevelFailure = (payload) => ({ type: Types.EDIT_LEVEL_FAILURE, ...payload })
@@ -42,6 +46,9 @@ export default {
   receiveCategories,
   receiveCategoriesFailure,
   changeViewing,
+  addLevel,
+  addLevelSuccess,
+  addLevelFailure,
   editLevel,
   editLevelSuccess,
   editLevelFailure,
