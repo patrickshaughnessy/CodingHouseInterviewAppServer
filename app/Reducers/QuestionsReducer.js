@@ -15,6 +15,13 @@ const receiveQuestions = (state, action) => {
   })
 }
 
+const addQuestionSuccess = (state, action) => {
+  const { result } = action.payload
+  return state
+        .update('all', (all) => all.asMutable().concat(result._id))
+        .setIn(['byId', result._id], result)
+}
+
 const addLevelSuccess = (state, action) => {
   const { result } = action.payload
   return state.updateIn(['byId'], (l) => {
@@ -41,6 +48,7 @@ const deleteLevelSuccess = (state, action) => {
 
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions,
+  [Types.ADD_QUESTION_SUCCESS]: addQuestionSuccess,
   [Types.ADD_LEVEL_SUCCESS]: addLevelSuccess,
   [Types.DELETE_LEVEL_SUCCESS]: deleteLevelSuccess
   // [Types.CHANGE_VIEWING]: changeViewing

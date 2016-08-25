@@ -18,6 +18,18 @@ const receiveCategoriesFailure = (payload) => ({ type: Types.RECEIVE_CATEGORIES_
 
 const changeViewing = (categoryID) => ({ type: Types.CHANGE_VIEWING, categoryID })
 
+const addQuestion = (question) => ({ type: Types.ADD_QUESTION, question })
+const addQuestionSuccess = (payload) => ({ type: Types.ADD_QUESTION_SUCCESS, ...payload })
+const addQuestionFailure = (payload) => ({ type: Types.ADD_QUESTION_FAILURE, ...payload })
+
+const editQuestion = (question) => ({ type: Types.EDIT_QUESTION, question })
+const editQuestionSuccess = (payload) => ({ type: Types.EDIT_QUESTION_SUCCESS, ...payload })
+const editQuestionFailure = (payload) => ({ type: Types.EDIT_QUESTION_FAILURE, ...payload })
+
+const deleteQuestion = (question) => ({ type: Types.DELETE_QUESTION, question })
+const deleteQuestionSuccess = (payload) => ({ type: Types.DELETE_QUESTION_SUCCESS, ...payload })
+const deleteQuestionFailure = (payload) => ({ type: Types.DELETE_QUESTION_FAILURE, ...payload })
+
 const addLevel = (level) => ({ type: Types.ADD_LEVEL, level })
 const addLevelSuccess = (payload) => ({ type: Types.ADD_LEVEL_SUCCESS, ...payload })
 const addLevelFailure = (payload) => ({ type: Types.ADD_LEVEL_FAILURE, ...payload })
@@ -46,6 +58,15 @@ export default {
   receiveCategories,
   receiveCategoriesFailure,
   changeViewing,
+  addQuestion,
+  addQuestionSuccess,
+  addQuestionFailure,
+  editQuestion,
+  editQuestionSuccess,
+  editQuestionFailure,
+  deleteQuestion,
+  deleteQuestionSuccess,
+  deleteQuestionFailure,
   addLevel,
   addLevelSuccess,
   addLevelFailure,

@@ -9,10 +9,9 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Paper from 'material-ui/Paper'
 
-import NewQuestionForm from '../Components/NewQuestionForm'
-
 import CategorySelection from './CategorySelection'
 import QuestionsList from './QuestionsList'
+import AddQuestion from './AddQuestion'
 
 export class QuestionsPage extends Component {
 
@@ -44,12 +43,7 @@ export class QuestionsPage extends Component {
         />
         <CategorySelection />
         <QuestionsList />
-        {/* <QuestionsList
-          questions={this._mapQuestionsToCategory()}
-          />
-          <Paper>
-          <NewQuestionForm />
-        </Paper> */}
+        <AddQuestion />
       </div>
     )
   }

@@ -1,0 +1,8 @@
+.buttonsWrapper {
+  display: flex;
+}
+
+.addButton {
+  flex: 1;
+  margin: 1em;
+}

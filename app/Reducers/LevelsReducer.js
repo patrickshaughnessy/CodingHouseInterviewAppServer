@@ -39,6 +39,7 @@ const editLevelSuccess = (state, action) => {
 
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions,
+  [Types.ADD_QUESTION_SUCCESS]: addLevelSuccess,
   [Types.ADD_LEVEL_SUCCESS]: addLevelSuccess,
   [Types.EDIT_LEVEL_SUCCESS]: editLevelSuccess
 }

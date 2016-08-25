@@ -14,9 +14,11 @@ const create = (baseURL = '/') => {
   }
 
   const login = (email, password) => api.post('/auth', { email, password })
-  const getQuestions = () => api.get('/api/questions')
   const getCategories = () => api.get('/api/categories')
   const getUsers = () => api.post('/api/users', { token })
+
+  const getQuestions = () => api.get('/api/questions')
+  const addQuestion = (question) => api.post('/api/questions', question)
 
   const addLevel = (level) => api.post('/api/questions/levels', level)
   const editLevel = (level) => api.put('/api/questions/levels', level)
@@ -28,6 +30,7 @@ const create = (baseURL = '/') => {
     getQuestions,
     getCategories,
     getUsers,
+    addQuestion,
     addLevel,
     editLevel,
     deleteLevel,
