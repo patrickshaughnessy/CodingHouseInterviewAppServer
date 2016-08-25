@@ -29,14 +29,8 @@ export class QuestionsPage extends Component {
 
   componentDidMount () {
     const { requestQuestions, requestCategories } = this.props
-    requestCategories()
+    // requestCategories()
     requestQuestions()
-  }
-
-  _mapQuestionsToCategory = () => {
-    const { questions, viewing } = this.props
-    if (!questions || !viewing ) return
-    return questions.filter(question => question.category._id === viewing)
   }
 
   render () {
@@ -66,10 +60,6 @@ QuestionsPage.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.info,
-    categories: state.categories.all,
-    questions: state.questions,
-    viewing: state.categories.viewing
   }
 }
 

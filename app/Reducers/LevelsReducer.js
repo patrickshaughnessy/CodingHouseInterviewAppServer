@@ -3,37 +3,31 @@ import Immutable from 'seamless-immutable'
 import { createReducer } from 'reduxsauce'
 
 export const INITIAL_STATE = Immutable({
-  all: [],
   byId: {}
 })
 
 const receiveQuestions = (state, action) => {
-  const { entities, result } = action.payload
+  const { entities } = action.payload
   return state.merge({
-    all: result.questions,
-    byId: entities.questions
+    byId: entities.levels
   })
 }
 
-const deleteLevelSuccess = (state, action) => {
-  const { entities, result } = action.payload
+const editLevelSuccess = (state, action) => {
+  const { entities } = action.payload
   return state.updateIn(['byId'], (l) => {
+    const { levels } = entities
     const lvls = l.asMutable()
-    lvls[result._id] = result
+    for (let id in levels) {
+      lvls[id] = levels[id]
+    }
     return Immutable(lvls)
   })
 }
-//
-// const changeViewing = (state, action) => {
-//   return state.merge({
-//     viewing: action.categoryID
-//   })
-// }
 
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions,
-  [Types.DELETE_LEVEL_SUCCESS]: deleteLevelSuccess,
-  // [Types.CHANGE_VIEWING]: changeViewing
+  [Types.EDIT_LEVEL_SUCCESS]: editLevelSuccess
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)

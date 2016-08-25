@@ -19,6 +19,7 @@ const create = (baseURL = '/') => {
   const getUsers = () => api.post('/api/users', { token })
 
   const editLevel = (level) => api.put('/api/questions/levels', level)
+  const deleteLevel = (level) => api.delete(`/api/questions/levels/${level}`)
 
   return {
     // a list of the API functions
@@ -27,6 +28,7 @@ const create = (baseURL = '/') => {
     getCategories,
     getUsers,
     editLevel,
+    deleteLevel,
 
     // additional utilities
     setToken,

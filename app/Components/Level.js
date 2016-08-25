@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 
 import EditLevel from './EditLevel'
+import DeleteLevel from './DeleteLevel'
 
 export class Level extends Component {
   render () {
@@ -29,9 +30,7 @@ export class Level extends Component {
           >
             <TableRow>
               <EditLevel {...this.props} />
-              <TableHeaderColumn>
-                <RaisedButton label='Delete' />
-              </TableHeaderColumn>
+              <DeleteLevel {...this.props} />
             </TableRow>
           </TableHeader>
           <TableBody
@@ -67,7 +66,7 @@ export class Level extends Component {
             {renderDefaultValue &&
               <TableRow>
                 <TableRowColumn>Default Value: </TableRowColumn>
-                <TableRowColumn>{defaultValue.toString().toUpperCase()}</TableRowColumn>
+                <TableRowColumn>{defaultValue && defaultValue.toString().toUpperCase() || 'N/A'}</TableRowColumn>
               </TableRow>
             }
             {renderRange &&

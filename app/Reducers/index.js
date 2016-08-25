@@ -4,6 +4,8 @@ import LoginReducer from './LoginReducer'
 import UserReducer from './UserReducer'
 import QuestionsReducer from './QuestionsReducer'
 import CategoriesReducer from './CategoriesReducer'
+import LevelsReducer from './LevelsReducer'
+import ControlReducer from './ControlReducer'
 
 export default function createReducer () {
   return combineReducers({
@@ -11,6 +13,8 @@ export default function createReducer () {
     login: LoginReducer,
     user: UserReducer,
     questions: QuestionsReducer,
-    categories: CategoriesReducer
+    categories: CategoriesReducer,
+    levels: LevelsReducer,
+    control: ControlReducer
   })
 }

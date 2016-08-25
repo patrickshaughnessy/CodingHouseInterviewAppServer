@@ -22,6 +22,10 @@ const editLevel = (level) => ({ type: Types.EDIT_LEVEL, level })
 const editLevelSuccess = (payload) => ({ type: Types.EDIT_LEVEL_SUCCESS, ...payload })
 const editLevelFailure = (payload) => ({ type: Types.EDIT_LEVEL_FAILURE, ...payload })
 
+const deleteLevel = (level) => ({ type: Types.DELETE_LEVEL, level })
+const deleteLevelSuccess = (payload) => ({ type: Types.DELETE_LEVEL_SUCCESS, ...payload })
+const deleteLevelFailure = (payload) => ({ type: Types.DELETE_LEVEL_FAILURE, ...payload })
+
 /**
  Makes available all the action creators we've created.
  */
@@ -40,5 +44,8 @@ export default {
   changeViewing,
   editLevel,
   editLevelSuccess,
-  editLevelFailure
+  editLevelFailure,
+  deleteLevel,
+  deleteLevelSuccess,
+  deleteLevelFailure
 }

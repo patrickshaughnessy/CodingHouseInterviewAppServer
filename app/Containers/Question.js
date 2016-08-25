@@ -26,7 +26,7 @@ Question.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    levelsById: state.questions.levels
+    levelsById: state.levels.byId
   }
 }
 

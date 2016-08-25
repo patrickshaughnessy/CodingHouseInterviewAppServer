@@ -9,8 +9,8 @@ import Question from './Question'
 export class QuestionsList extends Component {
 
   _filterViewing = () => {
-    const { allQuestions, questionsById, viewing } = this.props
-    return allQuestions.filter(question => questionsById[question].category === viewing)
+    const { questions, questionsById, viewing } = this.props
+    return questions.filter(question => questionsById[question].category === viewing)
   }
 
   render () {
@@ -27,9 +27,9 @@ QuestionsList.propTypes = {
 }
 const mapStateToProps = (state) => {
   return {
-    allQuestions: state.questions.allQuestions,
-    questionsById: state.questions.questions,
-    viewing: state.questions.viewing || state.questions.allCategories[0]
+    questions: state.questions.all,
+    questionsById: state.questions.byId,
+    viewing: state.control.viewing || state.categories.all[0]
   }
 }
 

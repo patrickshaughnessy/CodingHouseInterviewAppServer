@@ -10,7 +10,7 @@ import Paper from 'material-ui/Paper'
 export class CategorySelection extends Component {
 
   render () {
-    const { allCategories, categoriesById, viewing, changeViewing } = this.props
+    const { categories, categoriesById, viewing, changeViewing } = this.props
     return (
       <Paper>
         <span>View questions for : </span>
@@ -18,7 +18,7 @@ export class CategorySelection extends Component {
           value={viewing}
           onChange={(e, i, val) => changeViewing(val)}
         >
-          {allCategories && allCategories.map(category => {
+          {categories && categories.map(category => {
             return (
               <MenuItem
                 key={category}
@@ -38,15 +38,15 @@ CategorySelection.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    allCategories: state.questions.allCategories,
-    categoriesById: state.questions.categories,
-    viewing: state.questions.viewing || state.questions.allCategories[0]
+    categories: state.categories.all,
+    categoriesById: state.categories.byId,
+    viewing: state.control.viewing || state.categories.all[0]
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeViewing: (categoryID) => dispatch(Actions.changeViewing(categoryID)),
+    changeViewing: (categoryID) => dispatch(Actions.changeViewing(categoryID))
   }
 }
 
