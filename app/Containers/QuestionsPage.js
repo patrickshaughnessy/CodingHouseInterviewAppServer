@@ -9,8 +9,10 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Paper from 'material-ui/Paper'
 
-import CategorySelection from '../Components/CategorySelection'
-import QuestionsList from '../Components/QuestionsList'
+import NewQuestionForm from '../Components/NewQuestionForm'
+
+import CategorySelection from './CategorySelection'
+import QuestionsList from './QuestionsList'
 
 export class QuestionsPage extends Component {
 
@@ -38,7 +40,6 @@ export class QuestionsPage extends Component {
   }
 
   render () {
-    const { questions, categories, changeViewing, viewing } = this.props
     return (
       <div>
         <Helmet
@@ -47,14 +48,14 @@ export class QuestionsPage extends Component {
             { name: 'description', content: 'A list of available questions for interviews' }
           ]}
         />
-        <CategorySelection
-          categories={categories}
-          viewing={viewing}
-          changeViewing={changeViewing}
-        />
-        <QuestionsList
+        <CategorySelection />
+        <QuestionsList />
+        {/* <QuestionsList
           questions={this._mapQuestionsToCategory()}
-        />
+          />
+          <Paper>
+          <NewQuestionForm />
+        </Paper> */}
       </div>
     )
   }
@@ -67,9 +68,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.info,
     categories: state.categories.all,
-    categoriesById: state.categories.categoriesById,
-    questions: state.questions.all,
-    questionsById: state.questions.questionsById,
+    questions: state.questions,
     viewing: state.categories.viewing
   }
 }
@@ -79,6 +78,7 @@ const mapDispatchToProps = (dispatch) => {
     requestQuestions: () => dispatch(Actions.requestQuestions()),
     requestCategories: () => dispatch(Actions.requestCategories()),
     changeViewing: (categoryID) => dispatch(Actions.changeViewing(categoryID)),
+    editLevel: (payload) => dispatch(Actions.editLevel(payload)),
     changeRoute: (url) => dispatch(push(url))
   }
 }

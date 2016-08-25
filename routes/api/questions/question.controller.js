@@ -67,7 +67,7 @@ exports.levels = {
   },
   edit: (req, res) => {
     Question.findOneAndUpdate(
-      { '_id': req.body.questionID, 'levels._id': req.body.levelID },
+      { 'levels._id': req.body._id },
       {
         '$set': {
           'levels.$': req.body.level

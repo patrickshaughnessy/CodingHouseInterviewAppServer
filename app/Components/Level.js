@@ -10,30 +10,6 @@ import Dialog from 'material-ui/Dialog'
 import EditLevel from './EditLevel'
 
 export class Level extends Component {
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: false
-    }
-  }
-
-  _renderEditButton = () => {
-    return (
-      <TableHeaderColumn>
-        <RaisedButton label='Edit' onTouchTap={() => this.setState({ open: true })} />
-        <Dialog
-          title='Edit Level'
-          modal={false}
-          open={this.state.open}
-          onRequestClose={() => this.setState({ open: false })}
-        >
-
-        </Dialog>
-      </TableHeaderColumn>
-    )
-  }
-
   render () {
     const { type, question, placeholder, label, options, defaultValue, range } = this.props
     const renderPlaceholder = (type === 'INPUT_BOX')
@@ -41,6 +17,7 @@ export class Level extends Component {
     const renderOptions = (type === 'RADIO')
     const renderDefaultValue = (type === 'RADIO' || type === 'CHECKBOX' || type === 'SLIDER')
     const renderRange = (type === 'SLIDER')
+
     return (
       <ListItem>
         <Table

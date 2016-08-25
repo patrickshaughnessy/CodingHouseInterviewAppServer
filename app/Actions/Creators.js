@@ -9,7 +9,7 @@ const loginFailure = (payload) => ({ type: Types.LOGIN_FAILURE, ...payload })
 const logout = () => ({ type: Types.LOGOUT })
 
 const requestQuestions = () => ({ type: Types.REQUEST_QUESTIONS })
-const receiveQuestions = (questions) => ({ type: Types.RECEIVE_QUESTIONS, ...questions })
+const receiveQuestions = (payload) => ({ type: Types.RECEIVE_QUESTIONS, ...payload })
 const receiveQuestionsFailure = (payload) => ({ type: Types.RECEIVE_QUESTIONS_FAILURE, ...payload })
 
 const requestCategories = () => ({ type: Types.REQUEST_CATEGORIES })
@@ -17,6 +17,10 @@ const receiveCategories = (categories) => ({ type: Types.RECEIVE_CATEGORIES, ...
 const receiveCategoriesFailure = (payload) => ({ type: Types.RECEIVE_CATEGORIES_FAILURE, ...payload })
 
 const changeViewing = (categoryID) => ({ type: Types.CHANGE_VIEWING, categoryID })
+
+const editLevel = (level) => ({ type: Types.EDIT_LEVEL, level })
+const editLevelSuccess = (payload) => ({ type: Types.EDIT_LEVEL_SUCCESS, ...payload })
+const editLevelFailure = (payload) => ({ type: Types.EDIT_LEVEL_FAILURE, ...payload })
 
 /**
  Makes available all the action creators we've created.
@@ -33,5 +37,8 @@ export default {
   requestCategories,
   receiveCategories,
   receiveCategoriesFailure,
-  changeViewing
+  changeViewing,
+  editLevel,
+  editLevelSuccess,
+  editLevelFailure
 }

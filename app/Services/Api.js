@@ -18,12 +18,15 @@ const create = (baseURL = '/') => {
   const getCategories = () => api.get('/api/categories')
   const getUsers = () => api.post('/api/users', { token })
 
+  const editLevel = (level) => api.put('/api/questions/levels', level)
+
   return {
     // a list of the API functions
     login,
     getQuestions,
     getCategories,
     getUsers,
+    editLevel,
 
     // additional utilities
     setToken,
