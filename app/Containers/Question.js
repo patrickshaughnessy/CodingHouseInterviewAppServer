@@ -6,16 +6,19 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import Level from '../Components/Level'
 import AddLevel from '../Components/AddLevel'
+import DeleteQuestion from '../Components/DeleteQuestion'
 
 export class Question extends Component {
-
   render () {
     const { levels, levelsById, _id } = this.props
-    return (
+    const nestedLevels = levels.map(level => <Level key={level} {...levelsById[level]} />)
+    const addLevelButton = <AddLevel key={_id + 'ADD'} questionID={_id} />
+    const deleteQuestionButton = <DeleteQuestion key={_id + 'DELETE'} questionID={_id} />
+      return (
       <ListItem
         primaryText={levelsById[levels[0]].question}
         primaryTogglesNestedList
-        nestedItems={levels.map(level => <Level key={level} {...levelsById[level]} />).concat(<AddLevel key={_id + 'ADD'} questionID={_id} />)}
+        nestedItems={nestedLevels.concat(addLevelButton, deleteQuestionButton)}
       />
     )
   }

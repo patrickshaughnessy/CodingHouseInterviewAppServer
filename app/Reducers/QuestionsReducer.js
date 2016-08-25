@@ -22,6 +22,11 @@ const addQuestionSuccess = (state, action) => {
         .setIn(['byId', result._id], result)
 }
 
+const deleteQuestionSuccess = (state, action) => {
+  const { result } = action.payload
+  return state.update('all', (all) => all.asMutable().filter(question => question !== result._id))
+}
+
 const addLevelSuccess = (state, action) => {
   const { result } = action.payload
   return state.updateIn(['byId'], (l) => {
@@ -39,19 +44,13 @@ const deleteLevelSuccess = (state, action) => {
     return Immutable(lvls)
   })
 }
-//
-// const changeViewing = (state, action) => {
-//   return state.merge({
-//     viewing: action.categoryID
-//   })
-// }
 
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions,
   [Types.ADD_QUESTION_SUCCESS]: addQuestionSuccess,
+  [Types.DELETE_QUESTION_SUCCESS]: deleteQuestionSuccess,
   [Types.ADD_LEVEL_SUCCESS]: addLevelSuccess,
   [Types.DELETE_LEVEL_SUCCESS]: deleteLevelSuccess
-  // [Types.CHANGE_VIEWING]: changeViewing
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)
