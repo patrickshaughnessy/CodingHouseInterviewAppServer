@@ -75,6 +75,7 @@ export class AddQuestion extends Component {
 
   _addLevel = () => {
     const { type, question, placeholder, label, options, defaultValue, range, levels } = this.state
+    if (!question.length) return
     this.setState({
       open: false,
       type: 'INPUT_BOX',

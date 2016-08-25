@@ -10,7 +10,7 @@ export default (api) => {
   function * worker (task, level) {
     const response = yield call(api[task], level)
 
-    if (response.ok) {
+    if (response.ok && typeof response.data === 'object') {
       const payload = normalize(response.data, { levels: arrayOf(levelSchema) })
       yield put(Actions[`${task}Success`]({ payload }))
     } else if (response.data) {

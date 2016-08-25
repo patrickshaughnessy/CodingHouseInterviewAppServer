@@ -17,8 +17,8 @@ question.define({
 export default (api) => {
   function * worker () {
     const response = yield call(api.getQuestions)
-
-    if (response.ok) {
+    console.log(response)
+    if (response.ok && typeof response.data === 'object') {
       const payload = normalize(response.data, {questions: arrayOf(question), categories: arrayOf(category)})
       yield put(Actions.receiveQuestions({ payload }))
     } else if (response.data) {

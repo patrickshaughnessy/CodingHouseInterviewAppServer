@@ -43,6 +43,7 @@ export class AddLevel extends Component {
 
   _handleConfirm = () => {
     const { type, question, placeholder, label, options, defaultValue, range } = this.state
+    if (!question.length) return
     const { addLevel, questionID } = this.props
     const payload = {
       questionID,

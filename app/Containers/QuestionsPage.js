@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
+import NotificationSystem from 'react-notification-system'
+
+import LinearProgress from 'material-ui/LinearProgress'
 
 import Actions from '../Actions/Creators'
 
@@ -27,7 +30,25 @@ export class QuestionsPage extends Component {
     requestQuestions()
   }
 
+  componentWillReceiveProps (nextProps) {
+    const { notificationSystem } = this.refs
+    const { error, success } = nextProps
+    if (error) {
+      notificationSystem.addNotification({
+        message: error,
+        level: 'error'
+      })
+    }
+    if (success) {
+      notificationSystem.addNotification({
+        message: success,
+        level: 'success'
+      })
+    }
+  }
+
   render () {
+    const { fetching } = this.props
     return (
       <div>
         <Helmet
@@ -36,6 +57,8 @@ export class QuestionsPage extends Component {
             { name: 'description', content: 'A list of available questions for interviews' }
           ]}
         />
+        <NotificationSystem ref='notificationSystem' />
+        {fetching ? <LinearProgress /> : null}
         <CategorySelection />
         <QuestionsList />
         <AddQuestion />
@@ -49,6 +72,9 @@ QuestionsPage.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    fetching: state.control.fetching,
+    success: state.control.success,
+    error: state.control.error
   }
 }
 

@@ -75,7 +75,9 @@ function App (props) {
           ]}
         />
         <NavBar {...props} />
-        {React.Children.toArray(props.children)}
+        <div>
+          {React.Children.toArray(props.children)}
+        </div>
       </div>
     </MuiThemeProvider>
   )

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import Actions from '../Actions/Creators'
 
+import styles from './Styles/CategorySelectionStyle.css'
+
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Paper from 'material-ui/Paper'
@@ -12,7 +14,7 @@ export class CategorySelection extends Component {
   render () {
     const { categories, categoriesById, viewing, changeViewing } = this.props
     return (
-      <Paper>
+      <Paper className={styles.container}>
         <span>View questions for : </span>
         <DropDownMenu
           value={viewing}
