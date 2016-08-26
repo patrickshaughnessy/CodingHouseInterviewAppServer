@@ -8,11 +8,11 @@ import LinearProgress from 'material-ui/LinearProgress'
 
 import Actions from '../Actions/Creators'
 
-import CategorySelection from './CategorySelection'
-import QuestionsList from './QuestionsList'
-import AddQuestion from './AddQuestion'
+// import CategorySelection from './CategorySelection'
+// import QuestionsList from './QuestionsList'
+// import AddQuestion from './AddQuestion'
 
-export class QuestionsPage extends Component {
+export class SettingsPage extends Component {
 
   // constructor (props) {
   //   super(props)
@@ -23,8 +23,8 @@ export class QuestionsPage extends Component {
     if (!user) {
       changeRoute('/login')
     } else {
-      const { requestQuestions } = this.props
-      requestQuestions()
+      const { requestSettings } = this.props
+      requestSettings(user)
     }
   }
 
@@ -50,21 +50,19 @@ export class QuestionsPage extends Component {
     return (
       <div>
         <Helmet
-          title='Questions'
+          title='Settings'
           meta={[
-            { name: 'description', content: 'A list of available questions for interviews' }
+            { name: 'description', content: 'Settings for your interview' }
           ]}
         />
         <NotificationSystem ref='notificationSystem' />
         {fetching ? <LinearProgress /> : null}
-        <CategorySelection />
-        <QuestionsList />
-        <AddQuestion />
+
       </div>
     )
   }
 }
-QuestionsPage.propTypes = {
+SettingsPage.propTypes = {
   // changeRoute: React.PropTypes.func
 }
 
@@ -79,12 +77,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    requestQuestions: () => dispatch(Actions.requestQuestions()),
-    requestCategories: () => dispatch(Actions.requestCategories()),
-    changeViewing: (categoryID) => dispatch(Actions.changeViewing(categoryID)),
-    editLevel: (payload) => dispatch(Actions.editLevel(payload)),
+    requestSettings: (user) => dispatch(Actions.requestSettings(user)),
     changeRoute: (url) => dispatch(push(url))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)

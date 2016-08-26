@@ -16,7 +16,7 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import useScroll from 'react-router-scroll'
 import configureStore from './Store'
-// import Actions from './Actions/Creators'
+import Actions from './Actions/Creators'
 
 // // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // // the index.html file and this observer)
@@ -33,6 +33,8 @@ import configureStore from './Store'
 const initialState = {}
 const store = configureStore(initialState, browserHistory)
 
+store.dispatch(Actions.startup())
+
 if (process.env.NODE_ENV !== 'production' && window.devToolsExtension) {
   window.devToolsExtension.updateStore(store)
 }
@@ -47,8 +49,6 @@ const routes = {
   childRoutes: createRoutes(store)
 }
 
-// store.dispatch(Actions.startup()
-
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
@@ -56,8 +56,6 @@ const render = () => {
         history={history}
         routes={routes}
         render={
-          // Scroll to top when going to a new page, imitating default browser
-          // behaviour
           applyRouterMiddleware(useScroll())
         }
       />
@@ -66,31 +64,6 @@ const render = () => {
   )
 }
 
-// // Hot reloadable translation json files
-// if (module.hot) {
-//   // modules.hot.accept does not accept dynamic dependencies,
-//   // have to be constants at compile-time
-//   module.hot.accept('./i18n', () => {
-//     render(translationMessages)
-//   })
-// }
-
-// // Chunked polyfill for browsers without Intl support
-// if (!window.Intl) {
-//   (new Promise((resolve) => {
-//     resolve(System.import('intl'))
-//   }))
-//     .then(() => Promise.all([
-//       System.import('intl/locale-data/jsonp/en.js'),
-//       System.import('intl/locale-data/jsonp/de.js')
-//     ]))
-//     .then(() => render(translationMessages))
-//     .catch((err) => {
-//       throw err
-//     })
-// } else {
-//   render(translationMessages)
-// }
 render()
 
 // Install ServiceWorker and AppCache in the end since

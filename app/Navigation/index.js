@@ -26,15 +26,15 @@ export default function createRoutes (store) {
           .catch(errorLoading)
       }
     },
-    // {
-    //   path: '/settings',
-    //   name: 'settings',
-    //   getComponent (nextState, cb) {
-    //     System.import('Containers/SettingsPage')
-    //       .then(loadModule(cb))
-    //       .catch(errorLoading)
-    //   }
-    // },
+    {
+      path: '/settings',
+      name: 'settings',
+      getComponent (nextState, cb) {
+        System.import('Containers/SettingsPage')
+          .then(loadModule(cb))
+          .catch(errorLoading)
+      }
+    },
     {
       path: '/questions',
       name: 'questions',

@@ -2,7 +2,7 @@ import Types from './Types'
 
 const startup = () => ({ type: Types.STARTUP })
 
-const login = (email, password) => ({ type: Types.LOGIN, email, password })
+const login = (credentials) => ({ type: Types.LOGIN, credentials })
 const loginSuccess = (payload) => ({ type: Types.LOGIN_SUCCESS, ...payload })
 const loginFailure = (payload) => ({ type: Types.LOGIN_FAILURE, ...payload })
 
@@ -11,6 +11,10 @@ const logout = () => ({ type: Types.LOGOUT })
 const requestQuestions = () => ({ type: Types.REQUEST_QUESTIONS })
 const receiveQuestions = (payload) => ({ type: Types.RECEIVE_QUESTIONS, ...payload })
 const receiveQuestionsFailure = (payload) => ({ type: Types.RECEIVE_QUESTIONS_FAILURE, ...payload })
+
+const requestSettings = (user) => ({ type: Types.REQUEST_SETTINGS, user })
+const receiveSettings = (payload) => ({ type: Types.RECEIVE_SETTINGS, ...payload })
+const receiveSettingsFailure = (payload) => ({ type: Types.RECEIVE_SETTINGS_FAILURE, ...payload })
 
 const requestCategories = () => ({ type: Types.REQUEST_CATEGORIES })
 const receiveCategories = (categories) => ({ type: Types.RECEIVE_CATEGORIES, ...categories })
@@ -54,6 +58,9 @@ export default {
   requestQuestions,
   receiveQuestions,
   receiveQuestionsFailure,
+  requestSettings,
+  receiveSettings,
+  receiveSettingsFailure,
   requestCategories,
   receiveCategories,
   receiveCategoriesFailure,

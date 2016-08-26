@@ -13,9 +13,11 @@ const create = (baseURL = '/') => {
     return token || null
   }
 
-  const login = (email, password) => api.post('/auth', { email, password })
+  const login = (credentials) => api.post('/auth', credentials)
   const getCategories = () => api.get('/api/categories')
   const getUsers = () => api.post('/api/users', { token })
+
+  const getSettings = (user) => api.get(`/api/settings/${user._id}`)
 
   const getQuestions = () => api.get('/api/questions')
   const addQuestion = (question) => api.post('/api/questions', question)
@@ -29,6 +31,7 @@ const create = (baseURL = '/') => {
     // a list of the API functions
     login,
     getQuestions,
+    getSettings,
     getCategories,
     getUsers,
     addQuestion,

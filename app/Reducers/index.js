@@ -6,6 +6,7 @@ import QuestionsReducer from './QuestionsReducer'
 import CategoriesReducer from './CategoriesReducer'
 import LevelsReducer from './LevelsReducer'
 import ControlReducer from './ControlReducer'
+import SettingsReducer from './SettingsReducer'
 
 export default function createReducer () {
   return combineReducers({
@@ -15,6 +16,7 @@ export default function createReducer () {
     questions: QuestionsReducer,
     categories: CategoriesReducer,
     levels: LevelsReducer,
-    control: ControlReducer
+    control: ControlReducer,
+    settings: SettingsReducer
   })
 }
