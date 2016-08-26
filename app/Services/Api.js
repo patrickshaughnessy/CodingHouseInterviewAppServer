@@ -18,6 +18,7 @@ const create = (baseURL = '/') => {
   const getUsers = () => api.post('/api/users', { token })
 
   const getSettings = (user) => api.get(`/api/settings/${user._id}`)
+  const editSettings = (user, settings) => api.put(`api/settings/${user._id}`, settings)
 
   const getQuestions = () => api.get('/api/questions')
   const addQuestion = (question) => api.post('/api/questions', question)
@@ -32,6 +33,7 @@ const create = (baseURL = '/') => {
     login,
     getQuestions,
     getSettings,
+    editSettings,
     getCategories,
     getUsers,
     addQuestion,

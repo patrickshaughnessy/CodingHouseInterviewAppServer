@@ -4,7 +4,9 @@ import { createReducer } from 'reduxsauce'
 
 export const INITIAL_STATE = Immutable({
   token: null,
-  info: null
+  info: {
+    _id: '576db18b6594440300261e16'
+  }
 })
 
 // login attempts

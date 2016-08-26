@@ -30,8 +30,19 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  Settings.findOneAndUpdate({ user: req.params.id }, req.body, 'new', (err, settings) => {
-    return res.status(err ? 400 : 200).json(err || settings)
+  Settings.findOne({ user: req.params.id }, (err, settings) => {
+    if (err || !settings) return handleError(res, err, {statusCode: 400, message: 'No settings found - please update your interview app profile'})
+    let { categories } = settings
+    categories = categories.map(setting => {
+      const { category, questions } = req.body
+      if (setting.category.toString() === category) {
+        setting.questions = questions
+      }
+      return setting
+    })
+    settings.save((err, savedSettings) => {
+      return res.status(err ? 400 : 200).json(err || savedSettings)
+    })
   })
 }
 

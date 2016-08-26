@@ -14,7 +14,8 @@ const receiveSettings = (state, action) => {
 }
 
 const ACTION_HANDLERS = {
-  [Types.RECEIVE_SETTINGS]: receiveSettings
+  [Types.RECEIVE_SETTINGS]: receiveSettings,
+  [Types.EDIT_SETTINGS_SUCCESS]: receiveSettings
 
 }
 

@@ -16,6 +16,10 @@ const requestSettings = (user) => ({ type: Types.REQUEST_SETTINGS, user })
 const receiveSettings = (payload) => ({ type: Types.RECEIVE_SETTINGS, ...payload })
 const receiveSettingsFailure = (payload) => ({ type: Types.RECEIVE_SETTINGS_FAILURE, ...payload })
 
+const editSettings = (settings) => ({ type: Types.EDIT_SETTINGS, settings })
+const editSettingsSuccess = (payload) => ({ type: Types.EDIT_SETTINGS_SUCCESS, ...payload })
+const editSettingsFailure = (payload) => ({ type: Types.EDIT_SETTINGS_FAILURE, ...payload })
+
 const requestCategories = () => ({ type: Types.REQUEST_CATEGORIES })
 const receiveCategories = (categories) => ({ type: Types.RECEIVE_CATEGORIES, ...categories })
 const receiveCategoriesFailure = (payload) => ({ type: Types.RECEIVE_CATEGORIES_FAILURE, ...payload })
@@ -61,6 +65,9 @@ export default {
   requestSettings,
   receiveSettings,
   receiveSettingsFailure,
+  editSettings,
+  editSettingsSuccess,
+  editSettingsFailure,
   requestCategories,
   receiveCategories,
   receiveCategoriesFailure,
