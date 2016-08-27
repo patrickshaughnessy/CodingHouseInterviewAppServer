@@ -3,11 +3,8 @@ import { connect } from 'react-redux'
 
 import Actions from '../Actions/Creators'
 
-import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 
