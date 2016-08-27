@@ -9,6 +9,7 @@ import LinearProgress from 'material-ui/LinearProgress'
 import Actions from '../Actions/Creators'
 
 import CategoryTable from './CategoryTable'
+import Title from '../Components/Title'
 // import QuestionsList from './QuestionsList'
 // import AddQuestion from './AddQuestion'
 
@@ -74,6 +75,7 @@ export class SettingsPage extends Component {
         />
         <NotificationSystem ref='notificationSystem' />
         {fetching ? <LinearProgress /> : null}
+        <Title>Settings</Title>
         {this._renderSettings()}
       </div>
     )

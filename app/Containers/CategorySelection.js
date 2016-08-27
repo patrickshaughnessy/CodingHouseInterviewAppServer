@@ -9,14 +9,17 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Paper from 'material-ui/Paper'
 
+// import AddCategory from '../Components/AddCategory'
+
 export class CategorySelection extends Component {
 
   render () {
     const { categories, categoriesById, viewing, changeViewing } = this.props
     return (
       <Paper className={styles.container}>
-        <span>View questions for : </span>
+        <span className={styles.inner}>View questions for : </span>
         <DropDownMenu
+          className={styles.inner}
           value={viewing}
           onChange={(e, i, val) => changeViewing(val)}
         >
@@ -30,6 +33,7 @@ export class CategorySelection extends Component {
             )
           })}
         </DropDownMenu>
+        {/* <AddCategory className={styles.inner} /> */}
       </Paper>
     )
   }

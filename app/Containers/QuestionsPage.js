@@ -12,6 +12,8 @@ import CategorySelection from './CategorySelection'
 import QuestionsList from './QuestionsList'
 import AddQuestion from './AddQuestion'
 
+import Title from '../Components/Title'
+
 export class QuestionsPage extends Component {
 
   // constructor (props) {
@@ -57,6 +59,7 @@ export class QuestionsPage extends Component {
         />
         <NotificationSystem ref='notificationSystem' />
         {fetching ? <LinearProgress /> : null}
+        <Title>Questions</Title>
         <CategorySelection />
         <QuestionsList />
         <AddQuestion />

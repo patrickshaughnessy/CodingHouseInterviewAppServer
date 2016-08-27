@@ -6,6 +6,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import Actions from '../Actions/Creators'
 
+import styles from './Styles/CategoryTableStyle.css'
+
 export class CategoryTable extends Component {
 
   constructor (props) {
@@ -66,6 +68,7 @@ export class CategoryTable extends Component {
     const { editing } = this.state
     return (
       <Table
+        className={styles.container}
         multiSelectable
         onRowSelection={(active) => this.setState({ active })}
       >

@@ -4,25 +4,25 @@ import Actions from '../Actions/Creators'
 
 // attempts to login
 export default (api) => {
-  function * worker () {
-    const response = yield call(api.getCategories)
+  function * worker (category) {
+    const response = yield call(api.addCategory, category)
 
     if (response.ok) {
       const categories = response.data
-      yield put(Actions.receiveCategories({ categories }))
+      yield put(Actions.addCategorySuccess({ categories }))
     } else if (response.data) {
       const { status, data: {message} } = response
-      yield put(Actions.receiveCategoriesFailure({ message, status }))
+      yield put(Actions.addCategoryFailure({ message, status }))
     } else {
       const { status, problem } = response
-      yield put(Actions.receiveCategoriesFailure({ message: problem, status }))
+      yield put(Actions.addCategoryFailure({ message: problem, status }))
     }
   }
 
   function * watcher () {
     while (true) {
-      yield take(Types.REQUEST_CATEGORIES)
-      yield call(worker)
+      const { category } = yield take(Types.ADD_CATEGORY)
+      yield call(worker, category)
     }
   }
 

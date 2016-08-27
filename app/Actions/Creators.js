@@ -20,11 +20,11 @@ const editSettings = (settings) => ({ type: Types.EDIT_SETTINGS, settings })
 const editSettingsSuccess = (payload) => ({ type: Types.EDIT_SETTINGS_SUCCESS, ...payload })
 const editSettingsFailure = (payload) => ({ type: Types.EDIT_SETTINGS_FAILURE, ...payload })
 
-const requestCategories = () => ({ type: Types.REQUEST_CATEGORIES })
-const receiveCategories = (categories) => ({ type: Types.RECEIVE_CATEGORIES, ...categories })
-const receiveCategoriesFailure = (payload) => ({ type: Types.RECEIVE_CATEGORIES_FAILURE, ...payload })
-
 const changeViewing = (categoryID) => ({ type: Types.CHANGE_VIEWING, categoryID })
+
+const addCategory = (category) => ({ type: Types.ADD_CATEGORY, category })
+const addCategorySuccess = (payload) => ({ type: Types.ADD_CATEGORY_SUCCESS, ...payload })
+const addCategoryFailure = (payload) => ({ type: Types.ADD_CATEGORY_FAILURE, ...payload })
 
 const addQuestion = (question) => ({ type: Types.ADD_QUESTION, question })
 const addQuestionSuccess = (payload) => ({ type: Types.ADD_QUESTION_SUCCESS, ...payload })
@@ -68,10 +68,10 @@ export default {
   editSettings,
   editSettingsSuccess,
   editSettingsFailure,
-  requestCategories,
-  receiveCategories,
-  receiveCategoriesFailure,
   changeViewing,
+  addCategory,
+  addCategorySuccess,
+  addCategoryFailure,
   addQuestion,
   addQuestionSuccess,
   addQuestionFailure,

@@ -14,7 +14,7 @@ export default function * root () {
   yield fork(watchStartup)
   yield fork(AuthSaga(api).watcher)
   yield fork(QuestionsSaga(api).watcher)
-  yield fork(CategoriesSaga(api).watcher)
+  // yield fork(CategoriesSaga(api).watcher)
   yield fork(LevelSaga(api).watcher)
   yield fork(QuestionSaga(api).watcher)
   yield fork(SettingsSaga(api).watcher)

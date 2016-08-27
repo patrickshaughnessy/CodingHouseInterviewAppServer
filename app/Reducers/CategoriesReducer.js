@@ -15,24 +15,6 @@ const receiveQuestions = (state, action) => {
   })
 }
 
-// const editLevelSuccess = (state, action) => {
-//   const { entities } = action.payload
-//   return state.updateIn(['levels'], (l) => {
-//     const { levels } = entities
-//     const lvls = l.asMutable()
-//     for (let id in levels) {
-//       lvls[id] = levels[id]
-//     }
-//     return Immutable(lvls)
-//   })
-// }
-
-// const changeViewing = (state, action) => {
-//   return state.merge({
-//     viewing: action.categoryID
-//   })
-// }
-
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions
   // [Types.EDIT_LEVEL_SUCCESS]: editLevelSuccess,
