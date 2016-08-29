@@ -11,7 +11,7 @@ export const INITIAL_STATE = Immutable({
 
 const changeViewing = (state, action) => {
   return state.merge({
-    viewing: action.categoryID
+    viewing: action.categoryID || action.category._id
   })
 }
 
@@ -42,6 +42,10 @@ const update = (state, action) =>
 
 const ACTION_HANDLERS = {
   [Types.CHANGE_VIEWING]: changeViewing,
+  [Types.ADD_CATEGORY]: request,
+  [Types.ADD_CATEGORY_SUCCESS]: receive,
+  [Types.ADD_CATEGORY_SUCCESS]: changeViewing,
+  [Types.ADD_CATEGORY_FAILURE]: failure,
   [Types.REQUEST_QUESTIONS]: request,
   [Types.RECEIVE_QUESTIONS]: receive,
   [Types.RECEIVE_QUESTIONS_FAILURE]: failure,

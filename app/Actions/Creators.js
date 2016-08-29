@@ -22,7 +22,7 @@ const editSettingsFailure = (payload) => ({ type: Types.EDIT_SETTINGS_FAILURE, .
 
 const changeViewing = (categoryID) => ({ type: Types.CHANGE_VIEWING, categoryID })
 
-const addCategory = (category) => ({ type: Types.ADD_CATEGORY, category })
+const addCategory = (name) => ({ type: Types.ADD_CATEGORY, name })
 const addCategorySuccess = (payload) => ({ type: Types.ADD_CATEGORY_SUCCESS, ...payload })
 const addCategoryFailure = (payload) => ({ type: Types.ADD_CATEGORY_FAILURE, ...payload })
 

@@ -8,7 +8,7 @@ import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 
-export class AddLevel extends Component {
+export class AddCategory extends Component {
 
   constructor (props) {
     super(props)
@@ -76,7 +76,7 @@ export class AddLevel extends Component {
     )
   }
 }
-AddLevel.propTypes = {
+AddCategory.propTypes = {
   // changeRoute: React.PropTypes.func
 }
 
@@ -91,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddLevel)
+export default connect(mapStateToProps, mapDispatchToProps)(AddCategory)

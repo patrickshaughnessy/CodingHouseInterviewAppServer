@@ -17,7 +17,7 @@ export class CategoryTable extends Component {
 
     this.state = {
       editing: false,
-      active: active.asMutable().map(a => questions.indexOf(a))
+      active: active.map(a => questions.indexOf(a))
     }
   }
 
@@ -30,15 +30,10 @@ export class CategoryTable extends Component {
         category: category._id,
         questions: questions.filter((q, i) => active.indexOf(i) !== -1)
       }
-      console.log(payload)
       editSettings(payload)
     }
 
     this.setState({ editing: !editing })
-  }
-
-  _handleSelection = (active) => {
-
   }
 
   _renderQuestions = () => {

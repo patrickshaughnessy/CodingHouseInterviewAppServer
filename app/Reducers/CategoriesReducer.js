@@ -15,10 +15,16 @@ const receiveQuestions = (state, action) => {
   })
 }
 
+const addCategory = (state, action) => {
+  const { category } = action
+  return state
+  .update('all', (all) => all.asMutable().concat(category._id))
+  .setIn(['byId', category._id], category)
+}
+
 const ACTION_HANDLERS = {
-  [Types.RECEIVE_QUESTIONS]: receiveQuestions
-  // [Types.EDIT_LEVEL_SUCCESS]: editLevelSuccess,
-  // [Types.CHANGE_VIEWING]: changeViewing
+  [Types.RECEIVE_QUESTIONS]: receiveQuestions,
+  [Types.ADD_CATEGORY_SUCCESS]: addCategory
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)

@@ -14,8 +14,10 @@ const create = (baseURL = '/') => {
   }
 
   const login = (credentials) => api.post('/auth', credentials)
-  const getCategories = () => api.get('/api/categories')
   const getUsers = () => api.post('/api/users', { token })
+
+  const getCategories = () => api.get('/api/categories')
+  const addCategory = (name) => api.post('/api/categories', name)
 
   const getSettings = (user) => api.get(`/api/settings/${user._id}`)
   const editSettings = (user, settings) => api.put(`api/settings/${user._id}`, settings)
@@ -35,6 +37,7 @@ const create = (baseURL = '/') => {
     getSettings,
     editSettings,
     getCategories,
+    addCategory,
     getUsers,
     addQuestion,
     deleteQuestion,

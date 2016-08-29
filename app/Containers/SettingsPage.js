@@ -47,19 +47,20 @@ export class SettingsPage extends Component {
     }
   }
   _renderSettings = () => {
-    const { settings, allQuestions, questionsById, categoriesById, levelsById } = this.props
-    if (!settings || !allQuestions.length || !questionsById || !categoriesById) return
-    return settings.map(setting => {
-      const questions = allQuestions.filter(question => questionsById[question].category === setting.category)
+    const { settings, allQuestions, questionsById, allCategories, categoriesById, levelsById } = this.props
+    if (!settings.length || !allQuestions.length || !questionsById || !categoriesById || !levelsById) return
+    return allCategories.map(category => {
+      const questions = allQuestions.filter(question => questionsById[question].category === category)
+      const active = settings.find(setting => setting.category === category)
       const settingsProps = {
         questions,
         questionsById,
         categoriesById,
         levelsById,
-        category: categoriesById[setting.category],
-        active: setting.questions
+        category: categoriesById[category],
+        active: active ? active.questions : []
       }
-      return <CategoryTable key={setting.category} {...settingsProps} />
+      return <CategoryTable key={category} {...settingsProps} />
     })
   }
 
@@ -95,6 +96,7 @@ const mapStateToProps = (state) => {
     questionsById: state.questions.byId,
     allQuestions: state.questions.all,
     categoriesById: state.categories.byId,
+    allCategories: state.categories.all,
     levelsById: state.levels.byId
   }
 }

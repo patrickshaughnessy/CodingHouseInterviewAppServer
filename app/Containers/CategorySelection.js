@@ -9,7 +9,7 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Paper from 'material-ui/Paper'
 
-// import AddCategory from '../Components/AddCategory'
+import AddCategory from '../Components/AddCategory'
 
 export class CategorySelection extends Component {
 
@@ -33,7 +33,7 @@ export class CategorySelection extends Component {
             )
           })}
         </DropDownMenu>
-        {/* <AddCategory className={styles.inner} /> */}
+        <AddCategory className={styles.inner} />
       </Paper>
     )
   }
