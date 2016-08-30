@@ -22,6 +22,8 @@ const create = (baseURL = '/') => {
   const getSettings = (user) => api.get(`/api/settings/${user._id}`)
   const editSettings = (user, settings) => api.put(`api/settings/${user._id}`, settings)
 
+  const getInterviews = () => api.get('/api/interviews')
+
   const getQuestions = () => api.get('/api/questions')
   const addQuestion = (question) => api.post('/api/questions', question)
   const deleteQuestion = (question) => api.delete(`api/questions/${question}`)
@@ -33,6 +35,7 @@ const create = (baseURL = '/') => {
   return {
     // a list of the API functions
     login,
+    getInterviews,
     getQuestions,
     getSettings,
     editSettings,

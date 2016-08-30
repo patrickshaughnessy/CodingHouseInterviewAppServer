@@ -10,9 +10,9 @@ export default function createRoutes (store) {
   return [
     {
       path: '/',
-      name: 'home',
+      name: 'interviews',
       getComponent (nextState, cb) {
-        System.import('Containers/HomePage')
+        System.import('Containers/InterviewsPage')
           .then(loadModule(cb))
           .catch(errorLoading)
       }

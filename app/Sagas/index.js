@@ -7,6 +7,7 @@ import CategoriesSaga from './CategoriesSaga'
 import LevelSaga from './LevelSaga'
 import QuestionSaga from './QuestionSaga'
 import SettingsSaga from './SettingsSaga'
+import InterviewsSaga from './InterviewsSaga'
 
 const api = API.create()
 
@@ -18,4 +19,5 @@ export default function * root () {
   yield fork(LevelSaga(api).watcher)
   yield fork(QuestionSaga(api).watcher)
   yield fork(SettingsSaga(api).watcher)
+  yield fork(InterviewsSaga(api).watcher)
 }

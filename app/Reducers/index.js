@@ -7,6 +7,7 @@ import CategoriesReducer from './CategoriesReducer'
 import LevelsReducer from './LevelsReducer'
 import ControlReducer from './ControlReducer'
 import SettingsReducer from './SettingsReducer'
+import InterviewsReducer from './InterviewsReducer'
 
 export default function createReducer () {
   return combineReducers({
@@ -17,6 +18,7 @@ export default function createReducer () {
     categories: CategoriesReducer,
     levels: LevelsReducer,
     control: ControlReducer,
-    settings: SettingsReducer
+    settings: SettingsReducer,
+    interviews: InterviewsReducer
   })
 }

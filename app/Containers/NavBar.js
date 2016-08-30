@@ -41,8 +41,8 @@ class NavBar extends Component {
           docked={false}
           onRequestChange={open => this.setState({open})}
         >
-          <MenuItem onTouchTap={() => this._handleLocationChange('/')}>Home</MenuItem>
           <MenuItem onTouchTap={() => this._handleLocationChange('/login')}>Login</MenuItem>
+          <MenuItem onTouchTap={() => this._handleLocationChange('/')}>Interviews</MenuItem>
           <MenuItem onTouchTap={() => this._handleLocationChange('/settings')}>Settings</MenuItem>
           <MenuItem onTouchTap={() => this._handleLocationChange('/questions')}>Questions</MenuItem>
         </Drawer>
