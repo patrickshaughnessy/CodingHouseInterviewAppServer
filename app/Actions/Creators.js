@@ -2,6 +2,8 @@ import Types from './Types'
 
 const startup = () => ({ type: Types.STARTUP })
 
+const setToken = (token) => ({ type: Types.SET_TOKEN, token })
+
 const login = (credentials) => ({ type: Types.LOGIN, credentials })
 const loginSuccess = (payload) => ({ type: Types.LOGIN_SUCCESS, ...payload })
 const loginFailure = (payload) => ({ type: Types.LOGIN_FAILURE, ...payload })
@@ -59,6 +61,7 @@ const deleteLevelFailure = (payload) => ({ type: Types.DELETE_LEVEL_FAILURE, ...
  */
 export default {
   startup,
+  setToken,
   login,
   loginSuccess,
   loginFailure,

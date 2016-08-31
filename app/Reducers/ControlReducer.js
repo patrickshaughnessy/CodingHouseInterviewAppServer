@@ -40,6 +40,14 @@ const update = (state, action) =>
     success: action.message || 'Success'
   })
 
+const reset = (state, action) =>
+  state.merge({
+    viewing: null,
+    fetching: false,
+    error: null,
+    success: null
+  })
+
 const ACTION_HANDLERS = {
   [Types.CHANGE_VIEWING]: changeViewing,
   [Types.ADD_CATEGORY]: request,
@@ -63,7 +71,8 @@ const ACTION_HANDLERS = {
   [Types.DELETE_QUESTION_FAILURE]: failure,
   [Types.ADD_LEVEL_FAILURE]: failure,
   [Types.EDIT_LEVEL_FAILURE]: failure,
-  [Types.DELETE_LEVEL_FAILURE]: failure
+  [Types.DELETE_LEVEL_FAILURE]: failure,
+  [Types.LOGOUT]: reset
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)

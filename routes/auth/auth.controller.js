@@ -26,6 +26,17 @@ exports.authenticate = (req, res, next) => {
   })
 }
 
+exports.user = (req, res, next) => {
+  let { token } = req.body
+  request.get(codinghouse.user_info_url, (err, response, user) => {
+    if (!err && response.statusCode === 200) {
+      return res.status(200).json({user, token})
+    } else {
+      return handleError(res, err, response)
+    }
+  }).auth(null, null, true, token)
+}
+
 function handleError (res, err, response) {
   if (err) return res.status(500).send(err)
   let { statusCode, body: { message } } = response

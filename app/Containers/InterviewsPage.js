@@ -19,8 +19,8 @@ export class QuestionsPage extends Component {
   // }
 
   componentWillMount () {
-    const { user, changeRoute, requestInterviews } = this.props
-    if (!user) {
+    const { token, changeRoute, requestInterviews } = this.props
+    if (!token) {
       changeRoute('/login')
     } else {
       requestInterviews()
@@ -49,7 +49,7 @@ export class QuestionsPage extends Component {
     if (!interviews) return
     return (
       <List>
-        {interviews.map(interview => <Interview {...interviewsById[interview]} />)}
+        {interviews.map(interview => <Interview key={interview} {...interviewsById[interview]} />)}
       </List>
     )
   }
@@ -81,7 +81,7 @@ const mapStateToProps = (state) => {
     fetching: state.control.fetching,
     success: state.control.success,
     error: state.control.error,
-    user: state.user.info,
+    token: state.user.token,
     interviews: state.interviews.all,
     interviewsById: state.interviews.byId
   }

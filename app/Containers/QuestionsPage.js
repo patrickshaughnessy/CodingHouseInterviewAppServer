@@ -21,8 +21,8 @@ export class QuestionsPage extends Component {
   // }
 
   componentWillMount () {
-    const { user, changeRoute } = this.props
-    if (!user) {
+    const { token, changeRoute } = this.props
+    if (!token) {
       changeRoute('/login')
     } else {
       const { requestQuestions } = this.props
@@ -76,7 +76,8 @@ const mapStateToProps = (state) => {
     fetching: state.control.fetching,
     success: state.control.success,
     error: state.control.error,
-    user: state.user.info
+    user: state.user.info,
+    token: state.user.token
   }
 }
 

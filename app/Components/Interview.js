@@ -29,7 +29,7 @@ export class Interview extends Component {
       }
 
       return (
-        <TableRow style={{height: '100%'}}>
+        <TableRow key={l._id} style={{height: '100%'}}>
           <TableRowColumn style={{flex: 1, padding: '1em', whiteSpace: 'wrap', justifyContent: 'center'}}>{l.question}</TableRowColumn>
           <TableRowColumn style={{flex: 1, paddingLeft: '2em', whiteSpace: 'wrap', justifyContent: 'center'}}>{answer}</TableRowColumn>
         </TableRow>
@@ -40,26 +40,18 @@ export class Interview extends Component {
   _renderQuestions = (questions) => {
     return questions.map(q => {
       return (
-        <TableRow>
-          <Table
-            selectable={false}
-          >
-            {/* <TableHeader
-              displaySelectAll={false}
-              enableSelectAll={false}
-              adjustForCheckbox={false}
-              >
-              <TableRow>
-              <TableHeaderColumn>Question</TableHeaderColumn>
-              <TableHeaderColumn>Answer</TableHeaderColumn>
-              </TableRow>
-            </TableHeader> */}
-            <TableBody
-              displayRowCheckbox={false}
+        <TableRow key={q._id}>
+          <TableRowColumn style={{whiteSpace: 'wrap'}}>
+            <Table
+              selectable={false}
             >
-              {this._renderAnswers(q.levels, q.answers)}
-            </TableBody>
-          </Table>
+              <TableBody
+                displayRowCheckbox={false}
+              >
+                {this._renderAnswers(q.levels, q.answers)}
+              </TableBody>
+            </Table>
+          </TableRowColumn>
         </TableRow>
       )
     })
@@ -70,6 +62,7 @@ export class Interview extends Component {
     return data.map(d => {
       return (
         <Table
+          key={d.category._id}
           selectable={false}
         >
           <TableHeader

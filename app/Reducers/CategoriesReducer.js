@@ -22,9 +22,16 @@ const addCategory = (state, action) => {
   .setIn(['byId', category._id], category)
 }
 
+const reset = (state, action) =>
+  state.merge({
+    all: [],
+    byId: {}
+  })
+
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions,
-  [Types.ADD_CATEGORY_SUCCESS]: addCategory
+  [Types.ADD_CATEGORY_SUCCESS]: addCategory,
+  [Types.LOGOUT]: reset
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)

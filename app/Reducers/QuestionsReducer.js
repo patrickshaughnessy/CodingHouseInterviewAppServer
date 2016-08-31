@@ -45,12 +45,19 @@ const deleteLevelSuccess = (state, action) => {
   })
 }
 
+const reset = (state, action) =>
+  state.merge({
+    all: [],
+    byId: {}
+  })
+
 const ACTION_HANDLERS = {
   [Types.RECEIVE_QUESTIONS]: receiveQuestions,
   [Types.ADD_QUESTION_SUCCESS]: addQuestionSuccess,
   [Types.DELETE_QUESTION_SUCCESS]: deleteQuestionSuccess,
   [Types.ADD_LEVEL_SUCCESS]: addLevelSuccess,
-  [Types.DELETE_LEVEL_SUCCESS]: deleteLevelSuccess
+  [Types.DELETE_LEVEL_SUCCESS]: deleteLevelSuccess,
+  [Types.LOGOUT]: reset
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)

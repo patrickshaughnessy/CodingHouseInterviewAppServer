@@ -13,7 +13,7 @@ const api = API.create()
 
 export default function * root () {
   yield fork(watchStartup)
-  yield fork(AuthSaga(api).watcher)
+  yield fork(AuthSaga(api).init)
   yield fork(QuestionsSaga(api).watcher)
   yield fork(CategoriesSaga(api).watcher)
   yield fork(LevelSaga(api).watcher)

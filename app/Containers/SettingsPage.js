@@ -20,19 +20,26 @@ export class SettingsPage extends Component {
   // }
 
   componentWillMount () {
-    const { user, changeRoute } = this.props
-    if (!user) {
+    const { token, changeRoute } = this.props
+    if (!token) {
       changeRoute('/login')
-    } else {
-      const { requestSettings, requestQuestions } = this.props
-      requestSettings(user)
-      requestQuestions()
     }
+  }
+
+  componentDidMount () {
+    const { user, requestSettings, requestQuestions } = this.props
+    if (!user) return
+    requestSettings(user)
+    requestQuestions()
   }
 
   componentWillReceiveProps (nextProps) {
     const { notificationSystem } = this.refs
-    const { error, success } = nextProps
+    const { error, success, user, requestSettings, requestQuestions } = nextProps
+    if (user && !this.props.user) {
+      requestSettings(user)
+      requestQuestions()
+    }
     if (error) {
       notificationSystem.addNotification({
         message: error,
@@ -76,7 +83,7 @@ export class SettingsPage extends Component {
         />
         <NotificationSystem ref='notificationSystem' />
         {fetching ? <LinearProgress /> : null}
-        <Title>Settings</Title>
+        <Title>My Settings</Title>
         {this._renderSettings()}
       </div>
     )
@@ -92,6 +99,7 @@ const mapStateToProps = (state) => {
     success: state.control.success,
     error: state.control.error,
     user: state.user.info,
+    token: state.user.token,
     settings: state.settings.categories,
     questionsById: state.questions.byId,
     allQuestions: state.questions.all,

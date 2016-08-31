@@ -15,8 +15,15 @@ const receiveInterviews = (state, action) => {
   })
 }
 
+const reset = (state, action) =>
+  state.merge({
+    all: [],
+    byId: {}
+  })
+
 const ACTION_HANDLERS = {
-  [Types.RECEIVE_INTERVIEWS]: receiveInterviews
+  [Types.RECEIVE_INTERVIEWS]: receiveInterviews,
+  [Types.LOGOUT]: reset
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)

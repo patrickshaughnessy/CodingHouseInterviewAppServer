@@ -8,6 +8,8 @@ import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import AppBar from 'material-ui/AppBar'
 
+import Actions from '../Actions/Creators'
+
 class NavBar extends Component {
   constructor (props) {
     super(props)
@@ -24,6 +26,13 @@ class NavBar extends Component {
   _handleLocationChange = (location) => {
     const { changeRoute } = this.props
     changeRoute(location)
+    this._toggleDrawer()
+  }
+
+  _logout = () => {
+    const { changeRoute, logout } = this.props
+    logout()
+    changeRoute('/login')
     this._toggleDrawer()
   }
 
@@ -45,6 +54,7 @@ class NavBar extends Component {
           <MenuItem onTouchTap={() => this._handleLocationChange('/')}>Interviews</MenuItem>
           <MenuItem onTouchTap={() => this._handleLocationChange('/settings')}>Settings</MenuItem>
           <MenuItem onTouchTap={() => this._handleLocationChange('/questions')}>Questions</MenuItem>
+          <MenuItem onTouchTap={() => this._logout()}>Logout</MenuItem>
         </Drawer>
       </div>
     )
@@ -63,7 +73,8 @@ const mapStateToProps = (state, ownProps) => {
 
 function mapDispatchToProps (dispatch) {
   return {
-    changeRoute: (url) => dispatch(push(url))
+    changeRoute: (url) => dispatch(push(url)),
+    logout: () => dispatch(Actions.logout())
   }
 }
 
