@@ -1,7 +1,7 @@
 import apisauce from 'apisauce'
 
 const create = (baseURL = '/') => {
-  const api = apisauce.create({baseURL})
+  let api = apisauce.create({baseURL})
 
   const login = (credentials) => api.post('/auth', credentials)
   const authenticate = (token) => api.post('/auth/user', { token })
@@ -22,6 +22,10 @@ const create = (baseURL = '/') => {
   const editLevel = (level) => api.put('/api/questions/levels', level)
   const deleteLevel = (level) => api.delete(`/api/questions/levels/${level}`)
 
+  const setAuthHeader = (token) => {
+    api.setHeader('Authorization', `Bearer ${token}`)
+  }
+
   return {
     login,
     authenticate,
@@ -35,7 +39,8 @@ const create = (baseURL = '/') => {
     deleteQuestion,
     addLevel,
     editLevel,
-    deleteLevel
+    deleteLevel,
+    setAuthHeader
   }
 }
 

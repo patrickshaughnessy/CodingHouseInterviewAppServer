@@ -13,6 +13,7 @@ export default (api) => {
       let { user, token } = response.data
       user = JSON.parse(user)
       yield call(setAuthToken, token)
+      yield call(api.setAuthHeader, token)
       yield put(Actions.loginSuccess({ user, token }))
       yield put(push('/settings'))
       return token
@@ -33,6 +34,7 @@ export default (api) => {
       let { user, token } = response.data
       user = JSON.parse(user)
       yield call(setAuthToken, token)
+      yield call(api.setAuthHeader, token)
       yield put(Actions.loginSuccess({ user, token }))
       return false
     } else if (response.data) {
